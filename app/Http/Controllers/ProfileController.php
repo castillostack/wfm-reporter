@@ -8,19 +8,16 @@ use App\Http\Requests\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class ProfileController extends Controller
-{
-    public function show(ObtenerPerfilUsuarioAction $action): View
-    {
-        $usuario = $action->handle(auth()->id());
+class ProfileController extends Controller {
+   public function show(ObtenerPerfilUsuarioAction $action): View {
+      $usuario = $action->handle(auth()->id());
 
-        return view('pages.profile', compact('usuario'));
-    }
+      return view('pages.profile', compact('usuario'));
+   }
 
-    public function update(UpdateProfileRequest $request, ActualizarPerfilUsuarioAction $action): RedirectResponse
-    {
-        $usuario = $action->handle(auth()->id(), $request->validated());
+   public function update(UpdateProfileRequest $request, ActualizarPerfilUsuarioAction $action): RedirectResponse {
+      $usuario = $action->handle(auth()->id(), $request->validated());
 
-        return redirect()->route('profile.show')->with('success', 'Perfil actualizado correctamente.');
-    }
+      return redirect()->route('profile.show')->with('success', 'Perfil actualizado correctamente.');
+   }
 }
