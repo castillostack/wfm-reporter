@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Ruta raíz - redirigir al dashboard
+// Rutas de autenticación
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'authenticate'])->name('authenticate');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'store'])->name('register.store');
+});
+
+// Ruta raíz - redirigir al dashboard si autenticado, sino a login
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 })->name('home');
 
-// Dashboard principal
-Route::get('/dashboard', function () {
-    return view('pages.dashboard', ['title' => 'Dashboard']);
-})->name('dashboard');
+// Rutas protegidas
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 
 
