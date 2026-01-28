@@ -1,34 +1,103 @@
 # Mapeo de Controladores, Servicios y Componentes
 
-## Estado Actual del Proyecto (26 de enero de 2026)
+## Estado Actual del Proyecto (28 de enero de 2026)
 
 ### ✅ Implementado:
-- **Modelos (8)**: AttendanceLog, Department, Schedule, ScheduleChangeLog, ScheduleTemplate, Team, TimeOffRequest, User
+- **Modelos (8)**: Department, Employee, Leave, Schedule, ScheduleActivity, ScheduleTemplate, ShiftSwap, User
 - **Migraciones**: Todas las migraciones aplicadas correctamente
-- **Base de datos**: Estructura completa con relaciones y constraints
-- **Controladores (9)**: AuthController, DashboardController, ScheduleController, ScheduleTemplateController, TimeOffRequestController, AttendanceController, ReportController, UserController, Controller (base)
-- **Servicios (6)**: ScheduleService, CsvImportService, PdfGeneratorService, TimeOffRequestService, AttendanceService, MetricsCalculator, ReportService
-- **Componentes Livewire (3)**: TeamScheduleCalendar, ScheduleImporter, PendingRequestsTable, AttendanceTracker
-- **Form Requests (7)**: StoreScheduleRequest, StoreScheduleTemplateRequest, StoreTeamScheduleRequest, UpdateScheduleRequest, UpdateScheduleTemplateRequest, TimeOffRequestFormRequest, AttendanceStoreRequest
-- **Policies (4)**: SchedulePolicy, ScheduleTemplatePolicy, TimeOffRequestPolicy, AttendancePolicy
+- **Base de datos**: Estructura completa con relaciones y constraints (users y employees separados, schedules con activities, shift_swaps, leaves)
+- **Controladores (9)**: AuthController, DashboardController, ScheduleController, ScheduleTemplateController, LeaveController, AttendanceController, ReportController, UserController, Controller (base)
+- **Servicios (6)**: ScheduleService, CsvImportService, PdfGeneratorService, LeaveService, AttendanceService, MetricsCalculator, ReportService
+- **Componentes Livewire (3)**: DepartmentScheduleCalendar, ScheduleImporter, PendingRequestsTable, AttendanceTracker
+- **Form Requests (7)**: StoreScheduleRequest, StoreScheduleTemplateRequest, StoreDepartmentScheduleRequest, UpdateScheduleRequest, UpdateScheduleTemplateRequest, LeaveFormRequest, AttendanceStoreRequest
+- **Policies (4)**: SchedulePolicy, ScheduleTemplatePolicy, LeavePolicy, AttendancePolicy
 - **Exports (4)**: SchedulesExport, AttendanceExport, ComplianceReportExport, PunctualityReportExport
 - **Jobs (5)**: ProcessScheduleImport, SendDailyScheduleReminders, GenerateMonthlyReports, CalculateMonthlyMetrics, MarkDailyAbsences
-- **Observers (3)**: ScheduleObserver, TimeOffRequestObserver, AttendanceLogObserver
-- **Events/Listeners (8)**: ScheduleCreated/ScheduleUpdated/SendScheduleReminder, TimeOffRequestSubmitted/NotifySupervisorOfRequest, TimeOffRequestApproved/NotifyUserOfApproval/UpdateAttendanceFromRequest, TimeOffRequestRejected/NotifyUserOfApproval, AttendanceRecorded
-- **Rutas**: Actualizadas con rutas específicas para equipos, importación, solicitudes de tiempo libre, asistencia y reportes
-- **Vistas**: Implementadas en carpetas auth, dashboard, schedules, schedule-templates, time-off-requests, users, attendance, reports
+- **Observers (3)**: ScheduleObserver, LeaveObserver, AttendanceLogObserver
+- **Events/Listeners (8)**: ScheduleCreated/ScheduleUpdated/SendScheduleReminder, LeaveSubmitted/NotifySupervisorOfRequest, LeaveApproved/NotifyUserOfApproval/UpdateAttendanceFromRequest, LeaveRejected/NotifyUserOfApproval, AttendanceRecorded
+- **Rutas**: Actualizadas con rutas específicas para departments, importación, solicitudes de permisos, asistencia y reportes
+- **Vistas**: Implementadas en carpetas auth, dashboard, schedules, schedule-templates, leaves, users, attendance, reports
 - **Tests**: Tests básicos de Pest
 
 ### ❌ Pendiente de Implementar:
-- **Otros**: Middleware personalizado, notificaciones avanzadas (emails/SMS), reportes PDF/Excel completos, dashboard con métricas en tiempo real
+- **Otros**: Middleware personalizado, notificaciones avanzadas (emails/SMS), reportes PDF/Excel completos, dashboard con métricas en tiempo real, modelo AttendanceLog y tabla attendance_logs
 
 ### 📋 Próximas fases de desarrollo:
 1. **✅ Fase 1 COMPLETADA**: Autenticación y gestión de usuarios
 2. **✅ Fase 2 COMPLETADA**: Gestión de horarios
-3. **✅ Fase 3 COMPLETADA**: Solicitudes de tiempo libre
-4. **✅ Fase 4 COMPLETADA**: Asistencia y reportes
+3. **✅ Fase 3 COMPLETADA**: Solicitudes de permisos
+4. **❌ Fase 4 PENDIENTE**: Asistencia y reportes
 
 ---
+
+## 0. Modelos (app/Models)
+
+### User.php
+**Responsabilidad:** Modelo de usuario para autenticación
+**Relaciones:**
+- `belongsTo(Employee::class)` - Empleado asociado
+- `belongsToMany(Role::class)` - Roles via Spatie Permission
+**Atributos principales:** name, email, password
+
+### Employee.php
+**Responsabilidad:** Datos laborales del empleado
+**Relaciones:**
+- `belongsTo(User::class)` - Usuario autenticación
+- `belongsTo(Department::class)` - Departamento
+- `hasMany(Schedule::class)` - Horarios
+- `hasMany(Leave::class)` - Permisos
+- `hasMany(ShiftSwap::class)` - Intercambios de turno
+**Atributos principales:** cedula, nombre, apellido, salario, fecha_ingreso, supervisor_id
+
+### Department.php
+**Responsabilidad:** Departamentos/secciones
+**Relaciones:**
+- `hasMany(Employee::class)` - Empleados
+- `hasMany(Schedule::class)` - Horarios
+**Atributos principales:** nombre, descripcion
+
+### Schedule.php
+**Responsabilidad:** Horarios asignados
+**Relaciones:**
+- `belongsTo(Employee::class)` - Empleado
+- `belongsTo(Department::class)` - Departamento
+- `belongsTo(ScheduleTemplate::class)` - Plantilla
+- `hasMany(ScheduleActivity::class)` - Actividades (descansos, almuerzos)
+**Atributos principales:** fecha, hora_inicio, hora_fin, estado
+
+### ScheduleActivity.php
+**Responsabilidad:** Actividades dentro de un horario (descansos, almuerzos)
+**Relaciones:**
+- `belongsTo(Schedule::class)` - Horario padre
+**Atributos principales:** tipo, hora_inicio, hora_fin, duracion
+
+### ScheduleTemplate.php
+**Responsabilidad:** Plantillas de horarios
+**Relaciones:**
+- `hasMany(Schedule::class)` - Horarios generados
+**Atributos principales:** nombre, descripcion, dias_semana, horas_diarias
+
+### Leave.php
+**Responsabilidad:** Solicitudes de permisos
+**Relaciones:**
+- `belongsTo(Employee::class)` - Empleado solicitante
+**Atributos principales:** tipo_permiso, fecha_inicio, fecha_fin, estado, aprobado_por
+
+### ShiftSwap.php
+**Responsabilidad:** Intercambios de turnos
+**Relaciones:**
+- `belongsTo(Employee::class, 'solicitante_id')` - Solicitante
+- `belongsTo(Employee::class, 'reemplazante_id')` - Reemplazante
+**Atributos principales:** fecha, turno_original, turno_nuevo, estado
+
+### AttendanceLog.php (Pendiente)
+**Responsabilidad:** Registros de asistencia
+**Relaciones:**
+- `belongsTo(Employee::class)` - Empleado
+**Atributos principales:** fecha, check_in, check_out, metodo, estado
+
+---
+
 Usuario de prueba: admin@wfm.com / password (rol WFM)
 ---
 
@@ -69,19 +138,19 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `import()` - Vista importar CSV
 - `processImport()` - Procesar CSV
 
-### TimeOffRequestController.php
-**Responsabilidad:** Gestión de solicitudes
+### LeaveController.php
+**Responsabilidad:** Gestión de solicitudes de permisos
 **Métodos principales:**
-- `index()` - Listar solicitudes
-- `create()` - Formulario nueva solicitud
-- `store()` - Guardar solicitud
+- `index()` - Listar permisos
+- `create()` - Formulario nuevo permiso
+- `store()` - Guardar permiso
 - `show($id)` - Ver detalle
-- `edit($id)` - Editar solicitud (solo pendientes)
-- `update($id)` - Actualizar solicitud
-- `destroy($id)` - Cancelar solicitud
-- `pending()` - Solicitudes pendientes (supervisor)
-- `approve($id)` - Aprobar solicitud
-- `reject($id)` - Rechazar solicitud
+- `edit($id)` - Editar permiso (solo pendientes)
+- `update($id)` - Actualizar permiso
+- `destroy($id)` - Cancelar permiso
+- `pending()` - Permisos pendientes (supervisor)
+- `approve($id)` - Aprobar permiso
+- `reject($id)` - Rechazar permiso
 - `bulkApprove()` - Aprobación masiva
 
 ### AttendanceController.php
@@ -180,19 +249,19 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `getConflictingSchedules(int $userId, Carbon $date): ?Schedule`
 - `calculateScheduleHours(Schedule $schedule): int`
 
-### TimeOffRequestService.php
-**Responsabilidad:** Lógica de solicitudes
+### LeaveService.php
+**Responsabilidad:** Lógica de permisos
 **Métodos principales:**
-- `createRequest(array $data): TimeOffRequest`
-- `approveRequest(TimeOffRequest $request, User $approver, ?string $notes): bool`
-- `rejectRequest(TimeOffRequest $request, User $approver, ?string $notes): bool`
-- `cancelRequest(TimeOffRequest $request): bool`
+- `createRequest(array $data): Leave`
+- `approveRequest(Leave $request, User $approver, ?string $notes): bool`
+- `rejectRequest(Leave $request, User $approver, ?string $notes): bool`
+- `cancelRequest(Leave $request): bool`
 - `bulkApprove(array $requestIds, User $approver): int`
 - `validateRequestDates(Carbon $start, Carbon $end, int $userId): bool`
 - `checkVacationBalance(User $user, int $requestedDays): bool`
-- `processShiftSwap(TimeOffRequest $request): bool`
+- `processShiftSwap(Leave $request): bool`
 - `getPendingRequestsForSupervisor(int $supervisorId): Collection`
-- `notifyApprovalStatus(TimeOffRequest $request): void`
+- `notifyApprovalStatus(Leave $request): void`
 
 ### AttendanceService.php
 **Responsabilidad:** Lógica de asistencia
@@ -204,7 +273,7 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `syncWithSchedule(AttendanceLog $log): void`
 - `getAttendanceForPeriod(int $userId, Carbon $start, Carbon $end): Collection`
 - `markAbsences(Carbon $date): int`
-- `justifyAbsence(AttendanceLog $log, TimeOffRequest $request): bool`
+- `justifyAbsence(AttendanceLog $log, Leave $request): bool`
 
 ### MetricsCalculator.php
 **Responsabilidad:** Cálculo de métricas
@@ -278,14 +347,14 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `bulkApprove()`
 - `applyFilters()`
 
-### TeamScheduleCalendar.php
-**Responsabilidad:** Calendario de horarios del equipo
+### DepartmentScheduleCalendar.php
+**Responsabilidad:** Calendario de horarios del departamento
 **Propiedades:**
-- `$teamId`
+- `$departmentId`
 - `$currentWeek`
 - `$schedules`
 **Métodos:**
-- `mount($teamId)`
+- `mount($departmentId)`
 - `loadSchedules()`
 - `nextWeek()`
 - `previousWeek()`
@@ -359,13 +428,13 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - csv_file (required, file, mimes:csv,txt, max:10240)
 - template_id (required, exists:schedule_templates)
 
-### TimeOffRequestFormRequest.php
+### LeaveFormRequest.php
 **Validaciones:**
-- type (required, in:cambio_turno,dia_libre,vacaciones,etc)
-- start_date (required, date, after_or_equal:today)
-- end_date (required, date, after_or_equal:start_date)
-- reason (required_if:type,vacaciones, max:500)
-- swap_with_user_id (required_if:type,cambio_turno)
+- tipo_permiso (required, in:cambio_turno,dia_libre,vacaciones,etc)
+- fecha_inicio (required, date, after_or_equal:today)
+- fecha_fin (required, date, after_or_equal:fecha_inicio)
+- motivo (required_if:tipo_permiso,vacaciones, max:500)
+- reemplazante_id (required_if:tipo_permiso,cambio_turno)
 
 ### AttendanceStoreRequest.php
 **Validaciones:**
@@ -401,14 +470,14 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `delete(User $user, Schedule $schedule): bool`
 - `import(User $user): bool`
 
-### TimeOffRequestPolicy.php
+### LeavePolicy.php
 **Métodos:**
 - `viewAny(User $user): bool`
-- `view(User $user, TimeOffRequest $request): bool`
+- `view(User $user, Leave $request): bool`
 - `create(User $user): bool`
-- `update(User $user, TimeOffRequest $request): bool`
-- `delete(User $user, TimeOffRequest $request): bool`
-- `approve(User $user, TimeOffRequest $request): bool`
+- `update(User $user, Leave $request): bool`
+- `delete(User $user, Leave $request): bool`
+- `approve(User $user, Leave $request): bool`
 
 ### AttendancePolicy.php
 **Métodos:**
@@ -496,7 +565,7 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 - `updated()` - Log después de actualizar
 - `deleting()` - Log antes de eliminar
 
-### TimeOffRequestObserver.php
+### LeaveObserver.php
 **Métodos:**
 - `created()` - Notificar creación
 - `updated()` - Notificar cambios de estado
@@ -513,9 +582,9 @@ Usuario de prueba: admin@wfm.com / password (rol WFM)
 ### Events:
 - `ScheduleCreated`
 - `ScheduleUpdated`
-- `TimeOffRequestSubmitted`
-- `TimeOffRequestApproved`
-- `TimeOffRequestRejected`
+- `LeaveSubmitted`
+- `LeaveApproved`
+- `LeaveRejected`
 - `AttendanceRecorded`
 
 ### Listeners:

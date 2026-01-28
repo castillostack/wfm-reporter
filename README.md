@@ -1,420 +1,582 @@
-# TailAdmin Laravel - Tailwind CSS Free Laravel Dashboard
+# Sistema de Gestión de Horarios WFM - Call Center
 
-**TailAdmin Laravel** is a modern, production-ready admin dashboard template powered by **Laravel 12**, **Tailwind CSS v4**, **Alpine.js**, and a clean, modular architecture. TailAdmin is one of the most popular Tailwind CSS dashboard now also available for Larvael. It’s designed for building fast, scalable admin panels, CRM dashboards, SaaS backends, and any data-driven application where clarity and performance matter.
-![TailAdmin - Next.js Dashboard Preview](./tailadmin-laravel.png)
+<div align="center">
 
+![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## Quick Links
+**Sistema completo de gestión de horarios, asistencia y reportería para departamentos de Workforce Management**
 
-* [✨ Get TailAdmin Laravel](https://tailadmin.com/laravel)
-* [📄 Documentation](https://tailadmin.com/docs)
-* [⬇️ Download](https://tailadmin.com/download)
-* [🌐 Live Demo](https://laravel-demo.tailadmin.com)
+[Características](#-características) • [Instalación](#-instalación) • [Documentación](#-documentación) • [Roadmap](#-roadmap)
 
-Here’s a tighter, more search-friendly version that highlights value and avoids fluff while keeping your structure intact.
+</div>
 
-## ✨ Key Features
+---
 
-* 🚀 **Laravel 12 Core** - Built on the latest Laravel release with improved routing, security, and Blade templating
-* 🎨 **Tailwind CSS v4** - Utility-first styling for rapid, consistent UI development
-* ⚡ **Alpine.js Interactivity** - Lightweight reactivity without a heavy JavaScript framework
-* 📦 **Vite Build System** - Fast dev server, instant HMR, and optimized production builds
-* 📱 **Fully Responsive Layouts** - Smooth, mobile-first design that adapts across all screen sizes
-* 🌙 **Built-in Dark Mode** - Ready-to-use modern dark theme for better usability and aesthetics
-* 📊 **Advanced UI Components** - Charts, data tables, forms, calendars, modals, and reusable blocks for complex dashboards
-* 🎯 **Production-Ready Dashboard UI** - Clean, modern interface crafted for real apps, not placeholder demos
+## 📋 Tabla de Contenidos
 
-### Other Versions
+- [Descripción](#-descripción)
+- [Características](#-características)
+- [Roles de Usuario](#-roles-de-usuario)
+- [Stack Tecnológico](#-stack-tecnológico)
+- [Requisitos Previos](#-requisitos-previos)
+- [Instalación](#-instalación)
+- [Configuración](#-configuración)
+- [Uso](#-uso)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Migraciones y Seeders](#-migraciones-y-seeders)
+- [Testing](#-testing)
+- [Roadmap](#-roadmap)
+- [Contribución](#-contribución)
+- [Licencia](#-licencia)
 
-- [Next.js Version](https://github.com/TailAdmin/free-nextjs-admin-dashboard)
-- [React.js Version](https://github.com/TailAdmin/free-react-tailwind-admin-dashboard)
-- [Vue.js Version](https://github.com/TailAdmin/vue-tailwind-admin-dashboard)
-- [Angular Version](https://github.com/TailAdmin/free-angular-tailwind-dashboard)
-- [Laravel Version](https://github.com/TailAdmin/tailadmin-laravel)
+---
 
-## 📋 Requirements
-To set up TailAdmin Laravel, make sure your environment includes:
+## 📖 Descripción
 
-* **PHP 8.2+**
-* **Composer** (PHP dependency manager)
-* **Node.js 18+** and **npm** (for compiling frontend assets)
-* **Database** - Works with SQLite (default), MySQL, or PostgreSQL
+Sistema integral de gestión de horarios diseñado específicamente para centros de contacto (call centers), desarrollado para el departamento de **Workforce Management (WFM)**. 
 
-### Tailwind CSS Laravel Dashboard
+Permite la administración centralizada de horarios de operadores, gestión de solicitudes de cambios de turno, registro de asistencia en tiempo real y generación de reportes detallados de cumplimiento y productividad.
 
-TailAdmin delivers a refined Tailwind CSS Laravel Dashboard experience, combining Laravel’s robust backend with Tailwind’s flexible utility classes. The result is a clean, fast, and customizable dashboard that helps developers build modern admin interfaces without the usual front-end complexity. It’s ideal for teams looking for a Tailwind-powered Laravel starter that stays lightweight and easy to scale.
+### 🎯 Problema que Resuelve
 
-### Laravel Admin Dashboard
+- ❌ Gestión manual de horarios en Excel propensa a errores
+- ❌ Procesos de aprobación lentos y sin trazabilidad
+- ❌ Falta de visibilidad en tiempo real de la asistencia
+- ❌ Generación manual de reportes que consume horas
+- ❌ Dificultad para calcular métricas de cumplimiento
 
-If you’re searching for a dependable Laravel Admin Dashboard template that’s easy to set up and ready for production, TailAdmin fits the job. It offers a polished UI, reusable components, optimized performance, and all the essentials needed to launch dashboards, CRM systems, and internal tools quickly. It gives developers a solid foundation, so projects move faster with fewer decisions to worry about.
+### ✅ Solución
 
-### Check Your Environment
+- ✔️ Gestión automatizada con validaciones
+- ✔️ Flujos de aprobación digitales con notificaciones
+- ✔️ Dashboard en tiempo real
+- ✔️ Reportes automáticos exportables
+- ✔️ Cálculo automático de KPIs
 
-Verify your installations:
+---
+
+## ✨ Características
+
+### 🗓️ Gestión de Horarios
+- **Plantillas reutilizables** - Crea turnos predefinidos (mañana, tarde, noche)
+- **Asignación masiva** - Asigna horarios a equipos completos en segundos
+- **Importación CSV** - Carga horarios masivos desde archivos
+- **Duplicación inteligente** - Copia horarios de semanas anteriores
+- **Vista calendario** - Visualización clara semanal/mensual
+
+### 📝 Solicitudes y Aprobaciones
+- **Cambios de turno** - Intercambio entre operadores con aprobación
+- **Días libres y permisos** - Solicitud digital con workflow
+- **Vacaciones** - Gestión con control de saldo disponible
+- **Aprobación multinivel** - Coordinador → RRHH según tipo
+- **Notificaciones automáticas** - Email en cada cambio de estado
+
+### 👥 Gestión de Asistencia
+- **Registro digital** - Marca entrada/salida desde web o móvil
+- **Comparación automática** - Horario programado vs real
+- **Cálculo de retrasos** - Minutos tarde con tolerancia configurable
+- **Estados inteligentes** - Presente, tarde, ausente, justificado
+- **Historial completo** - Consulta de asistencia histórica
+
+### 📊 Reportes y Métricas
+- **Dashboard ejecutivo** - KPIs en tiempo real
+- **Reporte de asistencia** - Detallado por usuario/equipo/período
+- **Reporte de cumplimiento** - Comparativa programado vs real
+- **Tasa de puntualidad** - % de llegadas a tiempo
+- **Índice de ausentismo** - % de ausencias sobre días laborables
+- **Exportación múltiple** - PDF, Excel, CSV
+
+### 👔 Multi-tenancy por Roles
+- **5 roles diferentes** - Analista WFM, Director, Jefe, Coordinador, Operador
+- **Permisos granulares** - Control fino con Spatie Permission
+- **Vistas personalizadas** - Cada rol ve solo lo relevante
+- **Seguridad robusta** - Policies en cada acción crítica
+
+---
+
+## 👥 Roles de Usuario
+
+### 🔧 Analista WFM (Administrador)
+- Administración total del sistema
+- Creación de usuarios, equipos y departamentos
+- Asignación masiva de horarios
+- Importación CSV
+- Acceso a todos los reportes
+
+### 👔 Director Nacional
+- Vista ejecutiva de toda la operación
+- Acceso a dashboards estratégicos
+- Reportes consolidados
+- Solo lectura (no edita)
+
+### 📈 Jefe de Departamento
+- Vista completa de su departamento
+- Reportes de sus equipos
+- Comparativas entre equipos
+- Solo lectura
+
+### 👨‍💼 Coordinador
+- Gestión de su equipo
+- Aprobación de solicitudes (excepto vacaciones)
+- Monitoreo de asistencia en tiempo real
+- Vista de horarios del equipo
+
+### 👤 Operador
+- Consulta de su horario
+- Solicitud de cambios/permisos
+- Marca de asistencia
+- Historial personal
+
+---
+
+## 🛠️ Stack Tecnológico
+
+### Backend
+- **Laravel 11.x** - Framework PHP
+- **PHP 8.2+** - Lenguaje
+- **PostgreSQL 15+** - Base de datos
+- **Spatie Laravel Permission** - Roles y permisos
+- **Laravel Excel** - Importación/exportación
+- **DomPDF** - Generación de PDFs
+
+### Frontend
+- **Blade Templates** - Motor de plantillas
+- **Livewire 3.x** - Componentes reactivos
+- **Alpine.js** - Interactividad ligera
+- **Tailwind CSS** - Estilos
+- **Chart.js** - Gráficos
+- **FullCalendar.js** - Vista calendario
+
+### Herramientas
+- **Composer** - Gestor de dependencias PHP
+- **NPM** - Gestor de dependencias JS
+- **Vite** - Build tool
+- **Redis** (opcional) - Cache
+
+---
+
+## 📋 Requisitos Previos
+
+- PHP >= 8.2
+- Composer >= 2.6
+- PostgreSQL >= 15
+- Node.js >= 18.x
+- NPM >= 9.x
+- Redis (opcional, para cache)
+
+---
+
+## 🚀 Instalación
+
+### 1. Clonar el repositorio
 
 ```bash
-php -v
-composer -V
-node -v
-npm -v
+git clone https://github.com/tu-usuario/wfm-schedule-system.git
+cd wfm-schedule-system
 ```
 
-## 🚀 Quick Start Installation
-
-### Step 1: Clone the Repository
-
-```bash
-git clone https://github.com/TailAdmin/tailadmin-laravel.git
-cd tailadmin-laravel
-```
-
-### Step 2: Install PHP Dependencies
+### 2. Instalar dependencias PHP
 
 ```bash
 composer install
 ```
 
-This command will install all Laravel dependencies defined in `composer.json`.
-
-### Step 3: Install Node.js Dependencies
+### 3. Instalar dependencias JavaScript
 
 ```bash
 npm install
 ```
 
-Or if you prefer yarn or pnpm:
-
-```bash
-# Using yarn
-yarn install
-
-# Using pnpm
-pnpm install
-```
-
-### Step 4: Environment Configuration
-
-Copy the example environment file:
+### 4. Configurar variables de entorno
 
 ```bash
 cp .env.example .env
 ```
 
-**For Windows users:**
+Edita el archivo `.env` con tus credenciales:
 
-```bash
-copy .env.example .env
+```env
+APP_NAME="WFM Schedule System"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=wfm_schedule
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_password
+
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="no-reply@wfm.com"
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-**Or create it programmatically:**
-
-```bash
-php -r "file_exists('.env') || copy('.env.example', '.env');"
-```
-
-### Step 5: Generate Application Key
+### 5. Generar clave de aplicación
 
 ```bash
 php artisan key:generate
 ```
 
-This creates a unique encryption key for your application.
-
-### Step 6: Configure Database
-
-#### Option A: Using MySQL/PostgreSQL
-
-Update your `.env` file with your database credentials:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=tailadmin_db
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-```
-
-Create the database:
+### 6. Crear base de datos
 
 ```bash
-# MySQL
-mysql -u root -p -e "CREATE DATABASE tailadmin_db;"
+# Conéctate a PostgreSQL
+psql -U postgres
 
-# PostgreSQL
-createdb tailadmin_db
+# Crea la base de datos
+CREATE DATABASE wfm_schedule;
 ```
 
-Run migrations:
+### 7. Ejecutar migraciones
 
 ```bash
 php artisan migrate
 ```
 
-### Step 7: (Optional) Seed the Database
-
-If you want sample data:
+### 8. Ejecutar seeders (datos de prueba)
 
 ```bash
 php artisan db:seed
 ```
 
-### Step 8: Storage Link
+Esto creará:
+- Roles y permisos
+- 5 departamentos
+- 15 equipos
+- 1 usuario administrador (analista WFM)
+- 100 operadores de prueba
+- Datos de ejemplo
 
-Create a symbolic link for file storage:
-
-```bash
-php artisan storage:link
+**Credenciales de prueba:**
+```
+Email: admin@wfm.com
+Password: password
 ```
 
-## 🏃 Running the Application
+### 9. Compilar assets
 
-### Development Mode (Recommended)
-
-The easiest way to start development is using the built-in script:
-
-```bash
-composer run dev
-```
-
-This single command starts:
-- ✅ Laravel development server (http://localhost:8000)
-- ✅ Vite dev server for hot module reloading
-- ✅ Queue worker for background jobs
-- ✅ Log monitoring
-
-**Access your application at:** [http://localhost:8000](http://localhost:8000)
-
-### Manual Development Setup
-
-If you prefer to run services individually in separate terminal windows:
-
-**Terminal 1 - Laravel Server:**
-```bash
-php artisan serve
-```
-
-**Terminal 2 - Frontend Assets:**
 ```bash
 npm run dev
 ```
 
-### Building for Production
-
-#### Build Frontend Assets
+### 10. Iniciar servidor
 
 ```bash
-npm run build
+php artisan serve
 ```
 
-#### Optimize Laravel
+Accede a: `http://localhost:8000`
+
+---
+
+## ⚙️ Configuración
+
+### Configuración de Tolerancia de Retraso
+
+Edita `config/wfm.php`:
+
+```php
+<?php
+
+return [
+    'attendance' => [
+        'late_tolerance_minutes' => 10, // Tolerancia de retraso
+        'absent_threshold_minutes' => 30, // Minutos para marcar ausente
+    ],
+    
+    'schedule' => [
+        'break_default_duration' => 15, // Duración descanso (minutos)
+        'lunch_default_duration' => 60, // Duración almuerzo (minutos)
+    ],
+    
+    'notifications' => [
+        'enabled' => true,
+        'channels' => ['mail', 'database'],
+    ],
+];
+```
+
+### Configuración de Roles Inicial
+
+El seeder `RolePermissionSeeder` crea automáticamente:
+
+```php
+- Analista WFM (admin total)
+- Director Nacional (solo lectura)
+- Jefe de Departamento (lectura departamento)
+- Coordinador (gestión equipo)
+- Operador (auto-gestión)
+- Recursos Humanos (gestión vacaciones)
+```
+
+---
+
+## 📚 Uso
+
+### Crear un Usuario
 
 ```bash
-# Clear and cache configuration
-php artisan config:cache
-
-# Cache routes
-php artisan route:cache
-
-# Cache views
-php artisan view:cache
-
-# Optimize autoloader
-composer install --optimize-autoloader --no-dev
+php artisan make:user
 ```
 
-#### Production Environment
+O desde el panel de administración: `/admin/users/create`
 
-Update your `.env` for production:
+### Asignar Horario a un Operador
 
-```env
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://yourdomain.com
+1. Login como Analista WFM
+2. Ir a **Horarios → Asignación Masiva**
+3. Seleccionar equipo y rango de fechas
+4. Elegir plantilla de horario
+5. Confirmar asignación
+
+### Importar Horarios desde CSV
+
+Formato CSV esperado:
+
+```csv
+numero_empleado,fecha,entrada,descanso_inicio,descanso_duracion,almuerzo_inicio,almuerzo_duracion,salida
+12345,2026-02-03,07:00,10:00,15,12:00,60,15:00
+12346,2026-02-03,08:00,11:00,15,13:00,60,16:00
 ```
 
+Ruta: **Horarios → Importar CSV**
+
+### Aprobar Solicitudes (Coordinador)
+
+1. Login como Coordinador
+2. Ver badge de solicitudes pendientes en el menú
+3. Ir a **Solicitudes → Pendientes de Aprobación**
+4. Revisar detalle de solicitud
+5. Aprobar o rechazar con notas
+
+### Generar Reporte
+
+1. Ir a **Reportes → [Tipo de Reporte]**
+2. Configurar filtros:
+   - Período
+   - Departamento/Equipo
+   - Formato (PDF/Excel/CSV)
+3. Click en **Generar Reporte**
+4. Descargar archivo
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+wfm-schedule-system/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── DashboardController.php
+│   │   │   ├── ScheduleController.php
+│   │   │   ├── TimeOffRequestController.php
+│   │   │   ├── AttendanceController.php
+│   │   │   └── ReportController.php
+│   │   ├── Livewire/
+│   │   │   ├── PendingRequestsTable.php
+│   │   │   └── TeamScheduleCalendar.php
+│   │   ├── Requests/
+│   │   └── Middleware/
+│   ├── Models/
+│   │   ├── User.php
+│   │   ├── Employee.php
+│   │   ├── Schedule.php
+│   │   ├── TimeOffRequest.php
+│   │   └── AttendanceLog.php
+│   ├── Services/
+│   │   ├── ScheduleService.php
+│   │   ├── MetricsCalculator.php
+│   │   └── ReportService.php
+│   ├── Policies/
+│   ├── Helpers/
+│   │   └── MenuHelper.php
+│   └── Exports/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── resources/
+│   ├── views/
+│   │   ├── dashboard/
+│   │   ├── schedules/
+│   │   ├── requests/
+│   │   └── reports/
+│   └── js/
+├── routes/
+│   ├── web.php
+│   └── api.php
+├── tests/
+│   ├── Feature/
+│   └── Unit/
+├── .env.example
+├── composer.json
+├── package.json
+└── README.md
+```
+
+---
+
+## 🗄️ Migraciones y Seeders
+
+### Ejecutar Migraciones
+
+```bash
+# Todas las migraciones
+php artisan migrate
+
+# Migración específica
+php artisan migrate --path=/database/migrations/2026_01_28_create_schedules_table.php
+
+# Rollback última migración
+php artisan migrate:rollback
+
+# Resetear todo
+php artisan migrate:fresh
+```
+
+### Ejecutar Seeders
+
+```bash
+# Todos los seeders
+php artisan db:seed
+
+# Seeder específico
+php artisan db:seed --class=RolePermissionSeeder
+
+# Fresh + Seed (resetear y poblar)
+php artisan migrate:fresh --seed
+```
+
+### Seeders Disponibles
+
+- `RolePermissionSeeder` - Roles y permisos
+- `DepartmentSeeder` - Departamentos y equipos
+- `UserSeeder` - Usuarios de prueba
+- `ScheduleTemplateSeeder` - Plantillas de horarios
+- `TestDataSeeder` - Datos completos de prueba
+
+---
 
 ## 🧪 Testing
 
-Run the test suite using Pest:
-
 ```bash
-composer run test
-```
-
-Or manually:
-
-```bash
+# Ejecutar todos los tests
 php artisan test
-```
 
-Run with coverage:
+# Tests específicos
+php artisan test --filter=ScheduleTest
 
-```bash
+# Con coverage
 php artisan test --coverage
 ```
 
-Run specific tests:
+### Tests Incluidos
 
-```bash
-php artisan test --filter=ExampleTest
-```
+- ✅ Autenticación y roles
+- ✅ Creación de horarios
+- ✅ Aprobación de solicitudes
+- ✅ Cálculo de métricas
+- ✅ Registro de asistencia
+- ✅ Generación de reportes
 
-## 📜 Available Commands
+---
 
-### Composer Scripts
+## 🗺️ Roadmap
 
-```bash
-# Start development environment
-composer run dev
+### ✅ Versión 1.0 (MVP) - Completado
+- [x] Sistema de autenticación
+- [x] Gestión de horarios
+- [x] Solicitudes y aprobaciones
+- [x] Registro de asistencia
+- [x] Reportes básicos
+- [x] 5 roles de usuario
 
-# Run tests
-composer run test
+### 🚧 Versión 1.1 - En Desarrollo
+- [ ] Integración biométrica
+- [ ] App móvil (Flutter)
+- [ ] Notificaciones push
+- [ ] Dashboard mejorado con gráficos avanzados
+- [ ] Exportación masiva programada
 
-# Code formatting (if configured)
-composer run format
+### 📅 Versión 2.0 - Planeado
+- [ ] Inteligencia artificial para predicción de ausentismo
+- [ ] Optimización automática de horarios
+- [ ] Integración con sistemas de nómina
+- [ ] API REST completa
+- [ ] Multi-idioma (inglés, portugués)
 
-# Static analysis (if configured)
-composer run analyze
-```
+---
 
-### NPM Scripts
+## 🤝 Contribución
 
-```bash
-# Start Vite dev server
-npm run dev
+¡Las contribuciones son bienvenidas! Por favor sigue estos pasos:
 
-# Build for production
-npm run build
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add: nueva funcionalidad increíble'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-# Preview production build
-npm run preview
+### Convenciones de Código
 
-# Lint JavaScript/TypeScript
-npm run lint
+- PSR-12 para PHP
+- ESLint para JavaScript
+- Commits semánticos (Add, Fix, Update, Remove, Refactor)
 
-# Format code
-npm run format
-```
+---
 
-### Artisan Commands
+## 📄 Licencia
 
-```bash
-# Start development server
-php artisan serve
+Este proyecto está bajo la Licencia MIT. Ver archivo `LICENSE` para más detalles.
 
-# Run migrations
-php artisan migrate
+---
 
-# Rollback migrations
-php artisan migrate:rollback
+## 👨‍💻 Autor
 
-# Fresh migrations with seeding
-php artisan migrate:fresh --seed
+**Tu Nombre**
+- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- LinkedIn: [Tu Perfil](https://linkedin.com/in/tu-perfil)
+- Email: tu-email@ejemplo.com
 
-# Generate application key
-php artisan key:generate
+---
 
-# Clear all caches
-php artisan optimize:clear
+## 🙏 Agradecimientos
 
-# Cache everything for production
-php artisan optimize
+- [Laravel](https://laravel.com) - Framework PHP
+- [Spatie](https://spatie.be) - Paquetes increíbles
+- [Tailwind CSS](https://tailwindcss.com) - Framework CSS
+- [Livewire](https://livewire.laravel.com) - Componentes reactivos
 
-# Create symbolic link for storage
-php artisan storage:link
+---
 
-# Start queue worker
-php artisan queue:work
+## 📸 Screenshots
 
-# List all routes
-php artisan route:list
+### Dashboard Analista WFM
+![Dashboard](https://via.placeholder.com/800x400?text=Dashboard+Screenshot)
 
-# Create a new controller
-php artisan make:controller YourController
+### Vista de Horarios
+![Schedules](https://via.placeholder.com/800x400?text=Schedules+Screenshot)
 
-# Create a new model
-php artisan make:model YourModel -m
+### Aprobación de Solicitudes
+![Requests](https://via.placeholder.com/800x400?text=Requests+Screenshot)
 
-# Create a new migration
-php artisan make:migration create_your_table
-```
+### Reportes
+![Reports](https://via.placeholder.com/800x400?text=Reports+Screenshot)
 
-## 📁 Project Structure
+---
 
-```
-tailadmin-laravel/
-├── app/                    # Application logic
-│   ├── Http/              # Controllers, Middleware, Requests
-│   ├── Models/            # Eloquent models
-│   └── Providers/         # Service providers
-├── bootstrap/             # Framework bootstrap files
-├── config/                # Configuration files
-├── database/              # Migrations, seeders, factories
-│   ├── migrations/
-│   ├── seeders/
-│   └── factories/
-├── public/                # Public assets (entry point)
-│   ├── build/            # Compiled assets (generated)
-│   └── index.php         # Application entry point
-├── resources/             # Views and raw assets
-│   ├── css/              # Stylesheets (Tailwind)
-│   ├── js/               # JavaScript files (Alpine.js)
-│   └── views/            # Blade templates
-├── routes/                # Route definitions
-│   ├── web.php           # Web routes
-│   ├── api.php           # API routes
-│   └── console.php       # Console routes
-├── storage/               # Logs, cache, uploads
-│   ├── app/
-│   ├── framework/
-│   └── logs/
-├── tests/                 # Pest test files
-│   ├── Feature/
-│   └── Unit/
-├── .env.example           # Example environment file
-├── artisan                # Artisan CLI
-├── composer.json          # PHP dependencies
-├── package.json           # Node dependencies
-├── vite.config.js         # Vite configuration
-└── tailwind.config.js     # Tailwind configuration
-```
+<div align="center">
 
-## 🐛 Troubleshooting
+**⭐ Si este proyecto te fue útil, considera darle una estrella en GitHub ⭐**
 
-### Common Issues
-
-#### "Class not found" errors
-```bash
-composer dump-autoload
-```
-
-#### Permission errors on storage/bootstrap/cache
-```bash
-chmod -R 775 storage bootstrap/cache
-```
-
-#### NPM build errors
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-#### Clear all caches
-```bash
-php artisan optimize:clear
-```
-
-#### Database connection errors
-- Check `.env` database credentials
-- Ensure database server is running
-- Verify database exists
-
-## 🔄 Update Log
-
-### [2025-12-29]
-- Added Date Picker in Statistics Chart
-
-## License
-
-Refer to our [LICENSE](https://tailadmin.com/license) page for more information.
+</div>
