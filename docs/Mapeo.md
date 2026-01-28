@@ -9,15 +9,15 @@
 - **Controladores (9)**: AuthController, DashboardController, ScheduleController, ScheduleTemplateController, LeaveController, AttendanceController, ReportController, UserController, Controller (base)
 - **Servicios (6)**: ScheduleService, CsvImportService, PdfGeneratorService, LeaveService, AttendanceService, MetricsCalculator, ReportService
 - **Componentes Livewire (3)**: DepartmentScheduleCalendar, ScheduleImporter, PendingRequestsTable, AttendanceTracker
-- **Form Requests (7)**: StoreScheduleRequest, StoreScheduleTemplateRequest, StoreDepartmentScheduleRequest, UpdateScheduleRequest, UpdateScheduleTemplateRequest, LeaveFormRequest, AttendanceStoreRequest
+- **Form Requests (7)**: LoginRequest, RegisterRequest, StoreScheduleRequest, StoreScheduleTemplateRequest, StoreDepartmentScheduleRequest, UpdateScheduleRequest, UpdateScheduleTemplateRequest, LeaveFormRequest, AttendanceStoreRequest
 - **Policies (4)**: SchedulePolicy, ScheduleTemplatePolicy, LeavePolicy, AttendancePolicy
 - **Exports (4)**: SchedulesExport, AttendanceExport, ComplianceReportExport, PunctualityReportExport
 - **Jobs (5)**: ProcessScheduleImport, SendDailyScheduleReminders, GenerateMonthlyReports, CalculateMonthlyMetrics, MarkDailyAbsences
 - **Observers (3)**: ScheduleObserver, LeaveObserver, AttendanceLogObserver
 - **Events/Listeners (8)**: ScheduleCreated/ScheduleUpdated/SendScheduleReminder, LeaveSubmitted/NotifySupervisorOfRequest, LeaveApproved/NotifyUserOfApproval/UpdateAttendanceFromRequest, LeaveRejected/NotifyUserOfApproval, AttendanceRecorded
-- **Rutas**: Actualizadas con rutas específicas para departments, importación, solicitudes de permisos, asistencia y reportes
-- **Vistas**: Implementadas en carpetas auth, dashboard, schedules, schedule-templates, leaves, users, attendance, reports
-- **Tests**: Tests básicos de Pest
+- **Rutas**: Actualizadas con rutas específicas para auth (login, register, logout), departments, importación, solicitudes de permisos, asistencia y reportes
+- **Vistas**: Implementadas en carpetas auth (login, register), dashboard, schedules, schedule-templates, leaves, users, attendance, reports
+- **Tests**: Tests básicos de Pest para autenticación
 
 ### ❌ Pendiente de Implementar:
 - **Otros**: Middleware personalizado, notificaciones avanzadas (emails/SMS), reportes PDF/Excel completos, dashboard con métricas en tiempo real, modelo AttendanceLog y tabla attendance_logs
