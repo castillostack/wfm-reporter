@@ -17,6 +17,14 @@ return new class extends Migration {
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_active')->default(true);
+            $table->date('date_of_birth')->nullable();
+            $table->string('id_number', 20)->nullable();
+            $table->string('gender', 10)->nullable();
+            $table->string('employee_code', 50)->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->date('hire_date')->nullable();
+            $table->string('position')->nullable();
+            $table->decimal('salary', 10, 2)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

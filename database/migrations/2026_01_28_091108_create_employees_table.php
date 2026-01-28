@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('employee_number', 50)->unique()->index();
+            $table->string('employee_number', 50)->index();
             $table->string('cedula', 50)->unique()->nullable();
             $table->enum('gender', ['M', 'F'])->nullable();
             $table->date('birth_date')->nullable();
