@@ -55,7 +55,7 @@
                                 fill="currentColor"
                             />
                         </svg>',
-                        'path' => '#',
+                        'path' => route('profile.show'),
                     ],
                     [
                         'text' => 'Configuración de cuenta',
