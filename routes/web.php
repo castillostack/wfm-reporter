@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
 
     // Rutas de administración (solo Analista WFM)
     Route::prefix('admin')->name('admin.')->group(function () {
