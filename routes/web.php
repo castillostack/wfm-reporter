@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de perfil
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // Rutas de administración (solo Analista WFM)
