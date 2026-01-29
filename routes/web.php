@@ -48,6 +48,18 @@ Route::middleware('auth')->group(function () {
         Route::post('users/import', [\App\Http\Controllers\UserManagementController::class, 'import'])->name('users.import');
         Route::get('users/export', [\App\Http\Controllers\UserManagementController::class, 'export'])->name('users.export');
         Route::post('users/{id}/restore', [\App\Http\Controllers\UserManagementController::class, 'restore'])->name('users.restore');
+
+        // Rutas de empleados con IDs explícitos
+        Route::get('employees', [\App\Http\Controllers\EmployeeManagementController::class, 'index'])->name('employees.index');
+        Route::get('employees/create', [\App\Http\Controllers\EmployeeManagementController::class, 'create'])->name('employees.create');
+        Route::post('employees', [\App\Http\Controllers\EmployeeManagementController::class, 'store'])->name('employees.store');
+        Route::get('employees/{employeeId}', [\App\Http\Controllers\EmployeeManagementController::class, 'show'])->name('employees.show');
+        Route::get('employees/{employeeId}/edit', [\App\Http\Controllers\EmployeeManagementController::class, 'edit'])->name('employees.edit');
+        Route::put('employees/{employeeId}', [\App\Http\Controllers\EmployeeManagementController::class, 'update'])->name('employees.update');
+        Route::delete('employees/{employeeId}', [\App\Http\Controllers\EmployeeManagementController::class, 'destroy'])->name('employees.destroy');
+        Route::post('employees/import', [\App\Http\Controllers\EmployeeManagementController::class, 'import'])->name('employees.import');
+        Route::get('employees/export', [\App\Http\Controllers\EmployeeManagementController::class, 'export'])->name('employees.export');
+        Route::post('employees/{employeeId}/restore', [\App\Http\Controllers\EmployeeManagementController::class, 'restore'])->name('employees.restore');
     });
 });
 
