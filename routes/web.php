@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middleware\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,14 @@ Route::middleware('auth')->group(function () {
     // Rutas de perfil
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Rutas de administración (solo Analista WFM)
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('users', \App\Http\Controllers\UserManagementController::class);
+        Route::post('users/import', [\App\Http\Controllers\UserManagementController::class, 'import'])->name('users.import');
+        Route::get('users/export', [\App\Http\Controllers\UserManagementController::class, 'export'])->name('users.export');
+        Route::post('users/{id}/restore', [\App\Http\Controllers\UserManagementController::class, 'restore'])->name('users.restore');
+    });
 });
 
 
