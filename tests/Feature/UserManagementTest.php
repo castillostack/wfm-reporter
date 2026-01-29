@@ -180,3 +180,17 @@ it('prevents duplicate email addresses', function () {
     expect($validator->fails())->toBeTrue();
     expect($validator->errors()->has('email'))->toBeTrue();
 });
+
+it('allows analyst to view user details', function () {
+    $analyst = User::factory()->create();
+    $analyst->assignRole('analista-wfm');
+
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create(['user_id' => $user->id]);
+
+    $response = $this->actingAs($analyst)->withoutMiddleware()->get(route('admin.users.show', $user->id));
+
+    $response->assertStatus(200);
+    $response->assertViewIs('pages.admin.users.show');
+    $response->assertViewHas('user', $user);
+});

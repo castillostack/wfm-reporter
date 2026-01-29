@@ -85,14 +85,15 @@ class UserManagementController extends Controller {
             ->with('success', 'Usuario creado exitosamente. Credenciales enviadas por email.');
     }
 
-    public function show(User $usuario): View {
-        $usuario->load(['empleado.departamento', 'empleado.supervisor', 'roles', 'permissions']);
+    public function show(int $userId): View {
+        $user = User::with(['empleado.departamento', 'empleado.supervisor', 'roles', 'permissions'])
+            ->findOrFail($userId);
 
-        return view('pages.admin.users.show', compact('usuario'));
+        return view('pages.admin.users.show', compact('user'));
     }
 
-    public function edit(User $usuario): View {
-        $usuario->load(['empleado']);
+    public function edit(int $userId): View {
+        $usuario = User::with(['empleado'])->findOrFail($userId);
         $departamentos = Department::all();
         $usuarios = User::whereHas('roles', function ($q) {
             $q->whereIn('name', ['Jefe', 'Coordinador']);
@@ -101,8 +102,8 @@ class UserManagementController extends Controller {
         return view('pages.admin.users.edit', compact('usuario', 'departamentos', 'usuarios'));
     }
 
-    public function update(UpdateUserRequest $request, User $usuario, ActualizarUsuarioAction $action): RedirectResponse {
-        $action->handle($usuario->id, $request->validated());
+    public function update(UpdateUserRequest $request, int $userId, ActualizarUsuarioAction $action): RedirectResponse {
+        $action->handle($userId, $request->validated());
 
         return redirect()->route('admin.users.index')
             ->with('success', 'Usuario actualizado exitosamente.');
