@@ -1,0 +1,222 @@
+@extends('layouts.app')
+
+@section('title', 'Gestión de Usuarios')
+
+@section('content')
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Gestión de Usuarios</h1>
+                    <div class="flex space-x-3">
+                        <a href="{{ route('admin.users.export') }}"
+                            class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Exportar
+                        </a>
+                        <a href="{{ route('admin.users.create') }}"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Nuevo Usuario
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <form method="GET" class="flex flex-wrap gap-4">
+                    <div class="flex-1 min-w-0">
+                        <label for="search" class="block text-sm font-medium text-gray-700">Buscar</label>
+                        <input type="text" name="search" id="search" value="{{ request('search') }}"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            placeholder="Nombre, email, departamento...">
+                    </div>
+                    <div class="w-48">
+                        <label for="department" class="block text-sm font-medium text-gray-700">Departamento</label>
+                        <select name="department" id="department"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Todos los departamentos</option>
+                            @foreach (\App\Models\Department::all() as $dept)
+                                <option value="{{ $dept->id }}"
+                                    {{ request('department') == $dept->id ? 'selected' : '' }}>
+                                    {{ $dept->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="w-48">
+                        <label for="role" class="block text-sm font-medium text-gray-700">Rol</label>
+                        <select name="role" id="role"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Todos los roles</option>
+                            @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                                <option value="{{ $role->name }}" {{ request('role') == $role->name ? 'selected' : '' }}>
+                                    {{ ucfirst(str_replace('-', ' ', $role->name)) }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="w-48">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Estado</label>
+                        <select name="status" id="status"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Todos</option>
+                            <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Activo</option>
+                            <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Inactivo
+                            </option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Filtrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Import Form -->
+            <div class="px-6 py-4 border-b border-gray-200">
+                <form method="POST" action="{{ route('admin.users.import') }}" enctype="multipart/form-data"
+                    class="flex items-center space-x-4">
+                    @csrf
+                    <div>
+                        <label for="file" class="block text-sm font-medium text-gray-700">Importar usuarios
+                            (CSV/XLSX)</label>
+                        <input type="file" name="file" id="file" accept=".csv,.xlsx,.xls"
+                            class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Importar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Users Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Usuario</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Departamento</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rol
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Estado</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Último acceso</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @forelse($usuarios as $user)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 h-10 w-10">
+                                            <div
+                                                class="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                                                <span class="text-sm font-medium text-gray-700">
+                                                    {{ substr($user->name, 0, 1) . substr($user->employee?->last_name ?? '', 0, 1) }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
+                                            <div class="text-sm text-gray-500">{{ $user->employee?->last_name ?? '' }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $user->email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                    {{ $user->employee?->department?->name ?? 'Sin asignar' }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    @if ($user->hasRole('analista-wfm')) bg-purple-100 text-purple-800
+                                    @elseif($user->hasRole('director-nacional')) bg-red-100 text-red-800
+                                    @elseif($user->hasRole('jefe-departamento')) bg-blue-100 text-blue-800
+                                    @elseif($user->hasRole('coordinador')) bg-yellow-100 text-yellow-800
+                                    @elseif($user->hasRole('operador')) bg-green-100 text-green-800
+                                    @else bg-gray-100 text-gray-800 @endif">
+                                        {{ ucfirst(str_replace('-', ' ', $user->getRoleNames()->first() ?? 'sin-rol')) }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    {{ $user->trashed() ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }}">
+                                        {{ $user->trashed() ? 'Inactivo' : 'Activo' }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $user->last_login_at ? $user->last_login_at->format('d/m/Y H:i') : 'Nunca' }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="flex justify-end space-x-2">
+                                        <a href="{{ route('admin.users.show', $user) }}"
+                                            class="text-indigo-600 hover:text-indigo-900">Ver</a>
+                                        <a href="{{ route('admin.users.edit', $user) }}"
+                                            class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                        @if ($user->trashed())
+                                            <form method="POST" action="{{ route('admin.users.restore', $user) }}"
+                                                class="inline">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit" class="text-green-600 hover:text-green-900"
+                                                    onclick="return confirm('¿Restaurar este usuario?')">
+                                                    Restaurar
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                                                class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-900"
+                                                    onclick="return confirm('¿Desactivar este usuario?')">
+                                                    Desactivar
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="px-6 py-4 text-center text-gray-500">
+                                    No se encontraron usuarios
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            @if ($usuarios->hasPages())
+                <div class="px-6 py-4 border-t border-gray-200">
+                    {{ $usuarios->appends(request()->query())->links() }}
+                </div>
+            @endif
+        </div>
+    </div>
+@endsection
