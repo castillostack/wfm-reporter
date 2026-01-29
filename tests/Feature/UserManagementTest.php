@@ -194,3 +194,17 @@ it('allows analyst to view user details', function () {
     $response->assertViewIs('pages.admin.users.show');
     $response->assertViewHas('user', $user);
 });
+
+it('allows analyst to edit user', function () {
+    $analyst = User::factory()->create();
+    $analyst->assignRole('analista-wfm');
+
+    $user = User::factory()->create();
+    $employee = Employee::factory()->create(['user_id' => $user->id]);
+
+    $response = $this->actingAs($analyst)->get(route('admin.users.edit', $user->id));
+
+    $response->assertStatus(200);
+    $response->assertViewIs('pages.admin.users.edit');
+    $response->assertViewHas('user', $user);
+});

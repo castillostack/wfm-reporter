@@ -93,13 +93,13 @@ class UserManagementController extends Controller {
     }
 
     public function edit(int $userId): View {
-        $usuario = User::with(['empleado'])->findOrFail($userId);
+        $user = User::with(['empleado'])->findOrFail($userId);
         $departamentos = Department::all();
         $usuarios = User::whereHas('roles', function ($q) {
             $q->whereIn('name', ['Jefe', 'Coordinador']);
         })->get();
 
-        return view('pages.admin.users.edit', compact('usuario', 'departamentos', 'usuarios'));
+        return view('pages.admin.users.edit', compact('user', 'departamentos', 'usuarios'));
     }
 
     public function update(UpdateUserRequest $request, int $userId, ActualizarUsuarioAction $action): RedirectResponse {
