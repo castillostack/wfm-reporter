@@ -25,6 +25,10 @@ class Employee extends Model {
         'position',
         'department_id',
         'supervisor_id',
+        'email',
+        'address',
+        'emergency_contact_name',
+        'emergency_contact_phone',
     ];
 
     protected function casts(): array {
@@ -61,5 +65,9 @@ class Employee extends Model {
 
     public function cambiosTurnoRecibidos(): HasMany {
         return $this->hasMany(ShiftSwap::class, 'recipient_id');
+    }
+
+    public function subordinados(): HasMany {
+        return $this->hasMany(Employee::class, 'supervisor_id');
     }
 }
