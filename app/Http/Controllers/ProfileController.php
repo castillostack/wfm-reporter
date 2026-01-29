@@ -15,6 +15,12 @@ class ProfileController extends Controller {
       return view('pages.profile', compact('usuario'));
    }
 
+   public function edit(ObtenerPerfilUsuarioAction $action): View {
+      $usuario = $action->handle(auth()->id());
+
+      return view('pages.profile-edit', compact('usuario'));
+   }
+
    public function update(UpdateProfileRequest $request, ActualizarPerfilUsuarioAction $action): RedirectResponse {
       $usuario = $action->handle(auth()->id(), $request->validated());
 
