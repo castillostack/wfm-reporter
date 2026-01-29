@@ -9,7 +9,7 @@ class UpdateProfileRequest extends FormRequest {
     * Determine if the user is authorized to make this request.
     */
    public function authorize(): bool {
-      return auth()->check() && auth()->id() == $this->route('user');
+      return auth()->check();
    }
 
    /**
@@ -20,7 +20,7 @@ class UpdateProfileRequest extends FormRequest {
    public function rules(): array {
       return [
          'name' => 'required|string|max:255',
-         'email' => 'required|email|unique:users,email,' . $this->route('user'),
+         'email' => 'required|email|unique:users,email,' . auth()->id(),
          'first_name' => 'nullable|string|max:255',
          'last_name' => 'nullable|string|max:255',
          'phone' => 'nullable|string|max:20',
