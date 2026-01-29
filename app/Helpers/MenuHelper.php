@@ -26,18 +26,18 @@ class MenuHelper {
         ];
 
         // Gestión de Horarios
-        if ($user->hasAnyRole(['Analista WFM', 'Coordinador', 'Jefe de Departamento', 'Director Nacional'])) {
+        if ($user->hasAnyRole(['analista-wfm', 'coordinador', 'jefe-departamento', 'director-nacional'])) {
             $scheduleSubItems = [];
 
-            if ($user->hasRole('Analista WFM')) {
+            if ($user->hasRole('analista-wfm')) {
                 $scheduleSubItems[] = ['name' => 'Todos los Horarios', 'path' => '/horarios', 'permission' => 'view_all_schedules'];
                 $scheduleSubItems[] = ['name' => 'Crear Horario', 'path' => '/horarios/crear', 'permission' => 'create_schedule'];
                 $scheduleSubItems[] = ['name' => 'Asignación Masiva', 'path' => '/horarios/asignacion-masiva', 'permission' => 'create_schedule'];
                 $scheduleSubItems[] = ['name' => 'Importar CSV', 'path' => '/horarios/importar', 'permission' => 'import_schedules'];
                 $scheduleSubItems[] = ['name' => 'Plantillas', 'path' => '/plantillas-horarios', 'permission' => 'create_schedule'];
-            } elseif ($user->hasRole('Coordinador')) {
+            } elseif ($user->hasRole('coordinador')) {
                 $scheduleSubItems[] = ['name' => 'Horarios de Mi Equipo', 'path' => '/horarios/equipo', 'permission' => 'view_team_schedule'];
-            } elseif ($user->hasAnyRole(['Jefe de Departamento', 'Director Nacional'])) {
+            } elseif ($user->hasAnyRole(['jefe-departamento', 'director-nacional'])) {
                 $scheduleSubItems[] = ['name' => 'Ver Horarios', 'path' => '/horarios', 'permission' => 'view_all_schedules'];
             }
 
@@ -49,7 +49,7 @@ class MenuHelper {
         }
 
         // Mi Horario - Solo Operadores
-        if ($user->hasRole('Operador')) {
+        if ($user->hasRole('operador')) {
             $items[] = [
                 'icon' => 'calendar',
                 'name' => 'Mi Horario',
@@ -61,17 +61,17 @@ class MenuHelper {
         // Solicitudes
         $requestSubItems = [];
 
-        if ($user->hasRole('Operador')) {
+        if ($user->hasRole('operador')) {
             $requestSubItems[] = ['name' => 'Mis Solicitudes', 'path' => '/solicitudes/mis', 'permission' => 'view_own_requests'];
             $requestSubItems[] = ['name' => 'Nueva Solicitud', 'path' => '/solicitudes/crear', 'permission' => 'create_time_off_request'];
         }
 
-        if ($user->hasRole('Coordinador')) {
+        if ($user->hasRole('coordinador')) {
             $requestSubItems[] = ['name' => 'Pendientes de Aprobación', 'path' => '/solicitudes/pendientes', 'permission' => 'approve_requests'];
             $requestSubItems[] = ['name' => 'Historial de Solicitudes', 'path' => '/solicitudes/equipo', 'permission' => 'view_team_requests'];
         }
 
-        if ($user->hasAnyRole(['Analista WFM', 'Jefe de Departamento', 'Director Nacional'])) {
+        if ($user->hasAnyRole(['analista-wfm', 'jefe-departamento', 'director-nacional'])) {
             $requestSubItems[] = ['name' => 'Todas las Solicitudes', 'path' => '/solicitudes', 'permission' => 'view_all_requests'];
         }
 
@@ -87,22 +87,22 @@ class MenuHelper {
         // Asistencia
         $attendanceSubItems = [];
 
-        if ($user->hasRole('Operador')) {
+        if ($user->hasRole('operador')) {
             $attendanceSubItems[] = ['name' => 'Marcar Asistencia', 'path' => '/asistencia/marcar', 'permission' => 'view_own_attendance'];
             $attendanceSubItems[] = ['name' => 'Mi Historial', 'path' => '/asistencia/mi', 'permission' => 'view_own_attendance'];
         }
 
-        if ($user->hasRole('Coordinador')) {
+        if ($user->hasRole('coordinador')) {
             $attendanceSubItems[] = ['name' => 'Asistencia del Equipo', 'path' => '/asistencia/equipo', 'permission' => 'view_team_attendance'];
             $attendanceSubItems[] = ['name' => 'Asistencia de Hoy', 'path' => '/asistencia/hoy', 'permission' => 'view_team_attendance'];
         }
 
-        if ($user->hasAnyRole(['Analista WFM', 'Jefe de Departamento', 'Director Nacional'])) {
+        if ($user->hasAnyRole(['analista-wfm', 'jefe-departamento', 'director-nacional'])) {
             $attendanceSubItems[] = ['name' => 'Ver Asistencia', 'path' => '/asistencia', 'permission' => 'view_all_attendance'];
             $attendanceSubItems[] = ['name' => 'Asistencia de Hoy', 'path' => '/asistencia/hoy', 'permission' => 'view_all_attendance'];
         }
 
-        if ($user->hasRole('Analista WFM')) {
+        if ($user->hasRole('analista-wfm')) {
             $attendanceSubItems[] = ['name' => 'Registro Manual', 'path' => '/asistencia/crear', 'permission' => 'manage_attendance'];
         }
 
@@ -115,10 +115,10 @@ class MenuHelper {
         }
 
         // Reportes
-        if ($user->hasAnyRole(['Analista WFM', 'Director Nacional', 'Jefe de Departamento', 'Coordinador'])) {
+        if ($user->hasAnyRole(['analista-wfm', 'director-nacional', 'jefe-departamento', 'coordinador'])) {
             $reportSubItems = [];
 
-            if ($user->hasAnyRole(['Analista WFM', 'Director Nacional'])) {
+            if ($user->hasAnyRole(['analista-wfm', 'director-nacional'])) {
                 $reportSubItems[] = ['name' => 'Dashboard Ejecutivo', 'path' => '/reportes/ejecutivo', 'permission' => 'view_all_reports'];
             }
 
@@ -127,7 +127,7 @@ class MenuHelper {
             $reportSubItems[] = ['name' => 'Reporte de Puntualidad', 'path' => '/reportes/puntualidad', 'permission' => 'view_team_reports'];
             $reportSubItems[] = ['name' => 'Reporte de Ausentismo', 'path' => '/reportes/ausentismo', 'permission' => 'view_team_reports'];
 
-            if ($user->hasRole('Analista WFM')) {
+            if ($user->hasRole('analista-wfm')) {
                 $reportSubItems[] = ['name' => 'Métricas Generales', 'path' => '/reportes/metricas', 'permission' => 'view_all_reports'];
             }
 
@@ -139,12 +139,13 @@ class MenuHelper {
         }
 
         // Administración - Solo Analista WFM
-        if ($user->hasRole('Analista WFM')) {
+        if ($user->hasRole('analista-wfm')) {
             $items[] = [
                 'icon' => 'ui-elements',
                 'name' => 'Administración',
                 'subItems' => [
-                    ['name' => 'Usuarios', 'path' => '/administracion/usuarios', 'permission' => 'manage_users'],
+                    ['name' => 'Usuarios', 'path' => '/admin/users', 'permission' => 'manage_users'],
+                    ['name' => 'Empleados', 'path' => '/admin/employees', 'permission' => 'manage_users'],
                     ['name' => 'Departamentos', 'path' => '/administracion/departamentos', 'permission' => 'manage_departments'],
                     ['name' => 'Equipos', 'path' => '/administracion/equipos', 'permission' => 'manage_teams'],
                     ['name' => 'Roles y Permisos', 'path' => '/administracion/roles', 'permission' => 'manage_users'],
