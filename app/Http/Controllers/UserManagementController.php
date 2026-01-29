@@ -110,17 +110,25 @@ class UserManagementController extends Controller {
     }
 
     public function destroy($id, DesactivarUsuarioAction $action): RedirectResponse {
-        $action->handle((int) $id);
-
-        return redirect()->route('admin.users.index')
-            ->with('success', 'Usuario desactivado exitosamente.');
+        try {
+            $action->handle((int) $id);
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Usuario desactivado exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', $e->getMessage());
+        }
     }
 
     public function restore($id, DesactivarUsuarioAction $action): RedirectResponse {
-        $action->handleRestore($id);
-
-        return redirect()->route('admin.users.index')
-            ->with('success', 'Usuario reactivado exitosamente.');
+        try {
+            $action->handleRestore($id);
+            return redirect()->route('admin.users.index')
+                ->with('success', 'Usuario reactivado exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', $e->getMessage());
+        }
     }
 
     public function import(Request $request): JsonResponse {

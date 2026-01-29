@@ -1,6 +1,7 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 import ApexCharts from 'apexcharts';
+import Swal from 'sweetalert2';
 
 // flatpickr
 import flatpickr from 'flatpickr';
@@ -12,6 +13,7 @@ import { Calendar } from '@fullcalendar/core';
 
 window.Alpine = Alpine;
 window.ApexCharts = ApexCharts;
+window.Swal = Swal;
 window.flatpickr = flatpickr;
 window.FullCalendar = Calendar;
 

@@ -129,10 +129,14 @@ class EmployeeManagementController extends Controller {
     public function destroy(int $employeeId, DesactivarEmpleadoAction $action): RedirectResponse {
         $this->verificarRolAnalistaWfm();
 
-        $action->handle($employeeId);
-
-        return redirect()->route('admin.employees.index')
-            ->with('success', 'Empleado desactivado correctamente.');
+        try {
+            $action->handle($employeeId);
+            return redirect()->route('admin.employees.index')
+                ->with('success', 'Empleado desactivado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', $e->getMessage());
+        }
     }
 
     public function restore(int $id): RedirectResponse {
@@ -140,11 +144,22 @@ class EmployeeManagementController extends Controller {
             abort(403, 'Acceso denegado. Se requiere rol de Analista WFM.');
         }
 
-        $empleado = Employee::withTrashed()->findOrFail($id);
-        $empleado->restore();
+        try {
+            $empleado = Employee::withTrashed()->findOrFail($id);
 
-        return redirect()->route('admin.employees.index')
-            ->with('success', 'Empleado reactivado correctamente.');
+            // Verificar si ya está activo
+            if (!$empleado->trashed()) {
+                return redirect()->back()
+                    ->with('error', 'El empleado ya está activo.');
+            }
+
+            $empleado->restore();
+            return redirect()->route('admin.employees.index')
+                ->with('success', 'Empleado reactivado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error al reactivar empleado: ' . $e->getMessage());
+        }
     }
 
     public function import(Request $request): RedirectResponse {
