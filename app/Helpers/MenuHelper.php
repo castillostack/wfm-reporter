@@ -173,9 +173,9 @@ class MenuHelper {
             'icon' => 'user-profile',
             'name' => 'Mi Perfil',
             'subItems' => [
-                ['name' => 'Ver Perfil', 'path' => '/perfil', 'pro' => false],
-                ['name' => 'Editar Perfil', 'path' => '/perfil/editar', 'pro' => false],
-                ['name' => 'Cambiar Contraseña', 'path' => '/perfil/contrasena', 'pro' => false],
+                ['name' => 'Ver Perfil', 'path' => '/profile', 'pro' => false],
+                ['name' => 'Editar Perfil', 'path' => '/profile/edit', 'pro' => false],
+                ['name' => 'Cambiar Contraseña', 'path' => '/profile/password', 'pro' => false],
             ],
         ];
 
