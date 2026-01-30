@@ -172,51 +172,51 @@
 @endsection
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Manejar eliminación de usuarios con SweetAlert
-    document.querySelectorAll('form[action*="destroy"]').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejar eliminación de usuarios con SweetAlert
+            document.querySelectorAll('form[action*="destroy"]').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
 
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: '¿Deseas desactivar este usuario? Esto lo marcará como inactivo pero no lo eliminará permanentemente.',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#6b7280',
-                confirmButtonText: 'Sí, desactivar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: '¿Deseas desactivar este usuario? Esto lo marcará como inactivo pero no lo eliminará permanentemente.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ef4444',
+                        cancelButtonColor: '#6b7280',
+                        confirmButtonText: 'Sí, desactivar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                });
+            });
+
+            // Manejar restauración de usuarios con SweetAlert
+            document.querySelectorAll('form[action*="restore"]').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: '¿Deseas restaurar este usuario?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#10b981',
+                        cancelButtonColor: '#6b7280',
+                        confirmButtonText: 'Sí, restaurar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                });
             });
         });
-    });
-
-    // Manejar restauración de usuarios con SweetAlert
-    document.querySelectorAll('form[action*="restore"]').forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: '¿Deseas restaurar este usuario?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#10b981',
-                cancelButtonColor: '#6b7280',
-                confirmButtonText: 'Sí, restaurar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.submit();
-                }
-            });
-        });
-    });
-});
-</script>
+    </script>
 @endpush

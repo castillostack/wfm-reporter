@@ -146,7 +146,7 @@ class MenuHelper {
                 'subItems' => [
                     ['name' => 'Usuarios', 'path' => '/admin/users', 'permission' => 'manage_users'],
                     ['name' => 'Empleados', 'path' => '/admin/employees', 'permission' => 'manage_users'],
-                    ['name' => 'Departamentos', 'path' => '/administracion/departamentos', 'permission' => 'manage_departments'],
+                    ['name' => 'Departamentos', 'path' => '/admin/departments', 'permission' => 'manage_departments'],
                     ['name' => 'Equipos', 'path' => '/administracion/equipos', 'permission' => 'manage_teams'],
                     ['name' => 'Roles y Permisos', 'path' => '/administracion/roles', 'permission' => 'manage_users'],
                     ['name' => 'Configuración', 'path' => '/administracion/configuracion', 'permission' => 'manage_users'],

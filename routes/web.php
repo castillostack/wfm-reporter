@@ -60,6 +60,10 @@ Route::middleware('auth')->group(function () {
         Route::post('employees/import', [\App\Http\Controllers\EmployeeManagementController::class, 'import'])->name('employees.import');
         Route::get('employees/export', [\App\Http\Controllers\EmployeeManagementController::class, 'export'])->name('employees.export');
         Route::post('employees/{employeeId}/restore', [\App\Http\Controllers\EmployeeManagementController::class, 'restore'])->name('employees.restore');
+
+        // Rutas de departamentos
+        Route::resource('departments', \App\Http\Controllers\DepartmentManagementController::class);
+        Route::post('departments/{departmentId}/restore', [\App\Http\Controllers\DepartmentManagementController::class, 'restore'])->name('departments.restore');
     });
 });
 
