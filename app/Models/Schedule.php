@@ -43,4 +43,8 @@ class Schedule extends Model {
    public function cambiosTurnoRecibidos(): HasMany {
       return $this->hasMany(ShiftSwap::class, 'recipient_schedule_id');
    }
+
+   public function registroAsistencia(): HasMany {
+      return $this->hasMany(AttendanceLog::class, 'schedule_id');
+   }
 }

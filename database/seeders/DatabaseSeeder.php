@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
             DepartmentSeeder::class,
             UserSeeder::class,
             EmployeeSeeder::class,
+            AttendanceSeeder::class,
         ]);
 
         // User::factory()->create([

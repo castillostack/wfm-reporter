@@ -102,6 +102,15 @@ class UserSeeder extends Seeder {
         }
     }
 
+    private function parseSalary(string $salaryStr): ?float {
+        if (empty($salaryStr))
+            return null;
+        // Remover caracteres no numéricos excepto punto y coma
+        $cleaned = preg_replace('/[^\d.,]/', '', $salaryStr);
+        // Convertir a float
+        return (float) str_replace(',', '.', $cleaned);
+    }
+
     private function assignPermissionsToRoles(): void {
         // Permisos para analista-wfm (acceso completo)
         $analystRole = Role::where('name', 'analista-wfm')->first();
@@ -115,6 +124,7 @@ class UserSeeder extends Seeder {
                 'permissions.view', 'permissions.create', 'permissions.edit', 'permissions.delete',
                 'dashboard.view', 'reports.view', 'reports.generate',
                 'profile.view', 'profile.edit',
+                'view_own_attendance', 'view_team_attendance', 'view_all_attendance', 'manage_attendance',
             ]);
         }
 
@@ -125,6 +135,7 @@ class UserSeeder extends Seeder {
                 'users.view', 'employees.view', 'departments.view', 'teams.view',
                 'dashboard.view', 'reports.view', 'reports.generate',
                 'profile.view', 'profile.edit',
+                'view_all_attendance',
             ]);
         }
 
@@ -135,6 +146,7 @@ class UserSeeder extends Seeder {
                 'users.view', 'employees.view', 'employees.edit', 'departments.view',
                 'teams.view', 'teams.edit', 'dashboard.view', 'reports.view',
                 'profile.view', 'profile.edit',
+                'view_team_attendance',
             ]);
         }
 
@@ -145,6 +157,7 @@ class UserSeeder extends Seeder {
                 'users.view', 'employees.view', 'employees.edit', 'departments.view',
                 'teams.view', 'dashboard.view', 'reports.view',
                 'profile.view', 'profile.edit',
+                'view_team_attendance',
             ]);
         }
 
@@ -153,6 +166,8 @@ class UserSeeder extends Seeder {
         if ($operadorRole) {
             $operadorRole->syncPermissions([
                 'dashboard.view', 'profile.view', 'profile.edit',
+                'view_own_attendance',
             ]);
         }
     }
+}

@@ -75,4 +75,8 @@ class Employee extends Model {
     public function subordinados(): HasMany {
         return $this->hasMany(Employee::class, 'supervisor_id');
     }
+
+    public function registrosAsistencia(): HasMany {
+        return $this->hasMany(AttendanceLog::class, 'employee_id');
+    }
 }

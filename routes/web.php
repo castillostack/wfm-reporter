@@ -42,6 +42,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.edit-password');
     Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
 
+    // Rutas de asistencia
+    Route::prefix('asistencia')->name('attendance.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\AttendanceController::class, 'index'])->name('index');
+        Route::get('/marcar', [\App\Http\Controllers\AttendanceController::class, 'markAttendance'])->name('mark');
+        Route::post('/marcar', [\App\Http\Controllers\AttendanceController::class, 'markAttendance'])->name('mark.store');
+        Route::get('/mi', [\App\Http\Controllers\AttendanceController::class, 'myAttendance'])->name('my');
+        Route::get('/equipo', [\App\Http\Controllers\AttendanceController::class, 'teamAttendance'])->name('team');
+        Route::get('/hoy', [\App\Http\Controllers\AttendanceController::class, 'todayAttendance'])->name('today');
+        Route::get('/crear', [\App\Http\Controllers\AttendanceController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('store');
+        Route::get('/{id}', [\App\Http\Controllers\AttendanceController::class, 'show'])->name('show');
+    });
+
     // Rutas de administración (solo Analista WFM)
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', \App\Http\Controllers\UserManagementController::class);

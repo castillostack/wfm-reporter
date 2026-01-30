@@ -54,6 +54,12 @@ class PermissionSeeder extends Seeder {
          // Perfil
          'profile.view',
          'profile.edit',
+
+         // Asistencia
+         'view_own_attendance',
+         'view_team_attendance',
+         'view_all_attendance',
+         'manage_attendance',
       ];
 
       foreach ($permissions as $permission) {
