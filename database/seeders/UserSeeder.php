@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder {
     public function run(): void {
@@ -14,6 +15,9 @@ class UserSeeder extends Seeder {
         foreach ($roles as $role) {
             Role::firstOrCreate(['name' => $role]);
         }
+
+        // Asignar permisos a roles
+        $this->assignPermissionsToRoles();
 
         // Leer CSV de empleados
         $csvPath = base_path('docs/matriz_data.csv');
@@ -98,11 +102,57 @@ class UserSeeder extends Seeder {
         }
     }
 
-    private function parseSalary(string $salaryStr): ?float {
-        if (empty($salaryStr))
-            return null;
-        // Remover "B/. " y convertir
-        $clean = str_replace(['B/. ', ','], ['', ''], $salaryStr);
-        return (float) $clean;
+    private function assignPermissionsToRoles(): void {
+        // Permisos para analista-wfm (acceso completo)
+        $analystRole = Role::where('name', 'analista-wfm')->first();
+        if ($analystRole) {
+            $analystRole->syncPermissions([
+                'users.view', 'users.create', 'users.edit', 'users.delete', 'users.import', 'users.export',
+                'employees.view', 'employees.create', 'employees.edit', 'employees.delete', 'employees.import', 'employees.export',
+                'departments.view', 'departments.create', 'departments.edit', 'departments.delete',
+                'teams.view', 'teams.create', 'teams.edit', 'teams.delete',
+                'roles.view', 'roles.create', 'roles.edit', 'roles.delete',
+                'permissions.view', 'permissions.create', 'permissions.edit', 'permissions.delete',
+                'dashboard.view', 'reports.view', 'reports.generate',
+                'profile.view', 'profile.edit',
+            ]);
+        }
+
+        // Permisos para director-nacional
+        $directorRole = Role::where('name', 'director-nacional')->first();
+        if ($directorRole) {
+            $directorRole->syncPermissions([
+                'users.view', 'employees.view', 'departments.view', 'teams.view',
+                'dashboard.view', 'reports.view', 'reports.generate',
+                'profile.view', 'profile.edit',
+            ]);
+        }
+
+        // Permisos para jefe-departamento
+        $jefeRole = Role::where('name', 'jefe-departamento')->first();
+        if ($jefeRole) {
+            $jefeRole->syncPermissions([
+                'users.view', 'employees.view', 'employees.edit', 'departments.view',
+                'teams.view', 'teams.edit', 'dashboard.view', 'reports.view',
+                'profile.view', 'profile.edit',
+            ]);
+        }
+
+        // Permisos para coordinador
+        $coordinadorRole = Role::where('name', 'coordinador')->first();
+        if ($coordinadorRole) {
+            $coordinadorRole->syncPermissions([
+                'users.view', 'employees.view', 'employees.edit', 'departments.view',
+                'teams.view', 'dashboard.view', 'reports.view',
+                'profile.view', 'profile.edit',
+            ]);
+        }
+
+        // Permisos para operador (mínimos)
+        $operadorRole = Role::where('name', 'operador')->first();
+        if ($operadorRole) {
+            $operadorRole->syncPermissions([
+                'dashboard.view', 'profile.view', 'profile.edit',
+            ]);
+        }
     }
-}

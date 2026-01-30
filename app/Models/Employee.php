@@ -25,6 +25,7 @@ class Employee extends Model {
         'position',
         'department_id',
         'supervisor_id',
+        'team_id',
         'email',
         'address',
         'emergency_contact_name',
@@ -45,6 +46,10 @@ class Employee extends Model {
 
     public function departamento(): BelongsTo {
         return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function equipo(): BelongsTo {
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     public function supervisor(): BelongsTo {

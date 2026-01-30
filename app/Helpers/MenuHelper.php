@@ -140,17 +140,20 @@ class MenuHelper {
 
         // Administración - Solo Analista WFM
         if ($user->hasRole('analista-wfm')) {
+            $adminSubItems = [
+                ['name' => 'Usuarios', 'path' => '/admin/users', 'permission' => 'manage_users'],
+                ['name' => 'Empleados', 'path' => '/admin/employees', 'permission' => 'manage_users'],
+                ['name' => 'Departamentos', 'path' => '/admin/departments', 'permission' => 'manage_departments'],
+                ['name' => 'Equipos', 'path' => '/admin/teams', 'permission' => 'manage_teams'],
+                ['name' => 'Roles', 'path' => '/admin/roles', 'permission' => 'manage_users'],
+                ['name' => 'Permisos', 'path' => '/admin/permissions', 'permission' => 'manage_users'],
+                ['name' => 'Configuración', 'path' => '/admin/configuracion', 'permission' => 'manage_users'],
+            ];
+
             $items[] = [
                 'icon' => 'ui-elements',
                 'name' => 'Administración',
-                'subItems' => [
-                    ['name' => 'Usuarios', 'path' => '/admin/users', 'permission' => 'manage_users'],
-                    ['name' => 'Empleados', 'path' => '/admin/employees', 'permission' => 'manage_users'],
-                    ['name' => 'Departamentos', 'path' => '/admin/departments', 'permission' => 'manage_departments'],
-                    ['name' => 'Equipos', 'path' => '/administracion/equipos', 'permission' => 'manage_teams'],
-                    ['name' => 'Roles y Permisos', 'path' => '/administracion/roles', 'permission' => 'manage_users'],
-                    ['name' => 'Configuración', 'path' => '/administracion/configuracion', 'permission' => 'manage_users'],
-                ],
+                'subItems' => $adminSubItems,
             ];
         }
 

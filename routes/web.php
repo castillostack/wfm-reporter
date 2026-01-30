@@ -64,6 +64,22 @@ Route::middleware('auth')->group(function () {
         // Rutas de departamentos
         Route::resource('departments', \App\Http\Controllers\DepartmentManagementController::class);
         Route::post('departments/{departmentId}/restore', [\App\Http\Controllers\DepartmentManagementController::class, 'restore'])->name('departments.restore');
+
+        // Rutas de equipos
+        Route::resource('teams', \App\Http\Controllers\TeamManagementController::class);
+        Route::post('teams/{id}/restore', [\App\Http\Controllers\TeamManagementController::class, 'restore'])->name('teams.restore');
+
+        // Rutas de roles
+        Route::resource('roles', \App\Http\Controllers\RoleManagementController::class);
+
+        // Rutas de permisos
+        Route::resource('permissions', \App\Http\Controllers\PermissionManagementController::class);
+
+        // Rutas de configuración
+        Route::get('configuracion', [\App\Http\Controllers\ConfiguracionController::class, 'index'])->name('configuracion.index');
+        Route::post('configuracion', [\App\Http\Controllers\ConfiguracionController::class, 'update'])->name('configuracion.update');
+        Route::post('configuracion/clear-cache', [\App\Http\Controllers\ConfiguracionController::class, 'clearCache'])->name('configuracion.clear-cache');
+        Route::post('configuracion/maintenance', [\App\Http\Controllers\ConfiguracionController::class, 'maintenance'])->name('configuracion.maintenance');
     });
 });
 
