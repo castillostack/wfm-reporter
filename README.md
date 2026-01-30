@@ -60,6 +60,14 @@ Permite la administración centralizada de horarios de operadores, gestión de s
 
 ## ✨ Características
 
+### 🏢 Gestión Administrativa
+- **Gestión de Usuarios** - CRUD completo con roles y permisos
+- **Gestión de Empleados** - Perfiles completos con datos personales
+- **Gestión de Departamentos** - Estructura organizacional jerárquica
+- **Gestión de Equipos** - Agrupación de empleados por funciones
+- **Sistema de Roles y Permisos** - RBAC completo con Spatie Laravel Permission
+- **Configuración del Sistema** - Gestión de parámetros globales
+
 ### 🗓️ Gestión de Horarios
 - **Plantillas reutilizables** - Crea turnos predefinidos (mañana, tarde, noche)
 - **Asignación masiva** - Asigna horarios a equipos completos en segundos
@@ -90,8 +98,8 @@ Permite la administración centralizada de horarios de operadores, gestión de s
 - **Exportación múltiple** - PDF, Excel, CSV
 
 ### 👔 Multi-tenancy por Roles
-- **5 roles diferentes** - Analista WFM, Director, Jefe, Coordinador, Operador
-- **Permisos granulares** - Control fino con Spatie Permission
+- **6 roles diferentes** - Analista WFM, Director, Jefe, Coordinador, Operador, RRHH
+- **Permisos granulares** - Control fino con Spatie Permission (25+ permisos)
 - **Vistas personalizadas** - Cada rol ve solo lo relevante
 - **Seguridad robusta** - Policies en cada acción crítica
 
@@ -99,36 +107,49 @@ Permite la administración centralizada de horarios de operadores, gestión de s
 
 ## 👥 Roles de Usuario
 
-### 🔧 Analista WFM (Administrador)
-- Administración total del sistema
-- Creación de usuarios, equipos y departamentos
-- Asignación masiva de horarios
-- Importación CSV
-- Acceso a todos los reportes
+### 🔧 Analista WFM (Administrador del Sistema)
+- **Gestión Total del Sistema** - Control completo de todas las funcionalidades
+- **Administración de Usuarios** - CRUD completo, asignación de roles y permisos
+- **Gestión de Empleados** - Perfiles completos con datos personales y asignación a equipos
+- **Administración de Departamentos** - Creación y gestión de estructura organizacional
+- **Gestión de Equipos** - Creación de equipos y asignación de empleados
+- **Sistema de Roles y Permisos** - Gestión completa del RBAC (25+ permisos)
+- **Configuración del Sistema** - Parámetros globales, cachés, comandos de mantenimiento
+- **Asignación Masiva de Horarios** - Horarios para equipos completos
+- **Importación CSV** - Carga masiva de datos
+- **Acceso a Todos los Reportes** - Reportes completos y exportación
 
 ### 👔 Director Nacional
-- Vista ejecutiva de toda la operación
-- Acceso a dashboards estratégicos
-- Reportes consolidados
-- Solo lectura (no edita)
+- **Vista Ejecutiva Completa** - Dashboard estratégico de toda la operación
+- **Reportes Consolidados** - KPIs y métricas de alto nivel
+- **Acceso de Solo Lectura** - No puede modificar datos
+- **Visibilidad Global** - Todos los departamentos y equipos
 
 ### 📈 Jefe de Departamento
-- Vista completa de su departamento
-- Reportes de sus equipos
-- Comparativas entre equipos
-- Solo lectura
+- **Vista Completa de su Departamento** - Todos los equipos bajo su mando
+- **Reportes Departamentales** - Métricas consolidadas por departamento
+- **Comparativas entre Equipos** - Análisis de rendimiento
+- **Acceso de Solo Lectura** - No puede modificar datos
 
 ### 👨‍💼 Coordinador
-- Gestión de su equipo
-- Aprobación de solicitudes (excepto vacaciones)
-- Monitoreo de asistencia en tiempo real
-- Vista de horarios del equipo
+- **Gestión de su Equipo** - Empleados asignados directamente
+- **Aprobación de Solicitudes** - Cambios de turno, permisos (excepto vacaciones)
+- **Monitoreo de Asistencia** - Vista en tiempo real de su equipo
+- **Vista de Horarios del Equipo** - Programación y modificaciones
+- **Reportes de Equipo** - Métricas específicas de su grupo
 
 ### 👤 Operador
-- Consulta de su horario
-- Solicitud de cambios/permisos
-- Marca de asistencia
-- Historial personal
+- **Consulta de su Horario** - Vista personal de turnos asignados
+- **Solicitud de Cambios** - Permisos, cambios de turno, vacaciones
+- **Marca de Asistencia** - Registro de entrada/salida
+- **Historial Personal** - Consulta de asistencia y solicitudes
+- **Auto-gestión** - Modificación de datos personales
+
+### 🏢 Recursos Humanos (Opcional)
+- **Gestión de Vacaciones** - Control de saldos y aprobaciones
+- **Administración de Empleados** - Datos personales y contratos
+- **Reportes de Personal** - Estadísticas de empleados
+- **Gestión de Nómina** - Integración con sistemas de pago
 
 ---
 
@@ -373,40 +394,104 @@ Ruta: **Horarios → Importar CSV**
 
 ## 📁 Estructura del Proyecto
 
+## 📁 Estructura del Proyecto
+
 ```
 wfm-schedule-system/
 ├── app/
+│   ├── Actions/
+│   │   ├── Usuarios/
+│   │   │   ├── CrearUsuarioAction.php
+│   │   │   ├── ActualizarUsuarioAction.php
+│   │   │   └── EliminarUsuarioAction.php
+│   │   ├── Empleados/
+│   │   │   ├── CrearEmpleadoAction.php
+│   │   │   └── ActualizarEmpleadoAction.php
+│   │   ├── Departamentos/
+│   │   │   └── CrearDepartamentoAction.php
+│   │   └── Equipos/
+│   │       ├── CrearEquipoAction.php
+│   │       └── AsignarEmpleadosAction.php
 │   ├── Http/
 │   │   ├── Controllers/
+│   │   │   ├── Admin/
+│   │   │   │   ├── UserController.php
+│   │   │   │   ├── EmployeeController.php
+│   │   │   │   ├── DepartmentController.php
+│   │   │   │   ├── TeamController.php
+│   │   │   │   ├── RoleController.php
+│   │   │   │   ├── PermissionController.php
+│   │   │   │   └── SystemConfigController.php
 │   │   │   ├── DashboardController.php
 │   │   │   ├── ScheduleController.php
 │   │   │   ├── TimeOffRequestController.php
 │   │   │   ├── AttendanceController.php
 │   │   │   └── ReportController.php
 │   │   ├── Livewire/
+│   │   │   ├── Admin/
+│   │   │   │   ├── UserManagement.php
+│   │   │   │   ├── RoleManagement.php
+│   │   │   │   └── SystemConfig.php
 │   │   │   ├── PendingRequestsTable.php
 │   │   │   └── TeamScheduleCalendar.php
 │   │   ├── Requests/
+│   │   │   ├── Admin/
+│   │   │   │   ├── CreateUserRequest.php
+│   │   │   │   ├── UpdateUserRequest.php
+│   │   │   │   └── CreateEmployeeRequest.php
 │   │   └── Middleware/
 │   ├── Models/
 │   │   ├── User.php
 │   │   ├── Employee.php
+│   │   ├── Department.php
+│   │   ├── Team.php
 │   │   ├── Schedule.php
+│   │   ├── ScheduleTemplate.php
+│   │   ├── ScheduleActivity.php
 │   │   ├── TimeOffRequest.php
+│   │   ├── ShiftSwap.php
+│   │   ├── Leave.php
 │   │   └── AttendanceLog.php
 │   ├── Services/
 │   │   ├── ScheduleService.php
 │   │   ├── MetricsCalculator.php
-│   │   └── ReportService.php
+│   │   ├── ReportService.php
+│   │   └── PermissionService.php
 │   ├── Policies/
+│   │   ├── UserPolicy.php
+│   │   ├── EmployeePolicy.php
+│   │   ├── DepartmentPolicy.php
+│   │   └── TeamPolicy.php
 │   ├── Helpers/
 │   │   └── MenuHelper.php
 │   └── Exports/
 ├── database/
 │   ├── migrations/
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 2026_01_28_091108_create_employees_table.php
+│   │   ├── 2026_01_28_114821_create_schedule_templates_table.php
+│   │   ├── 2026_01_28_114850_create_schedules_table.php
+│   │   ├── 2026_01_28_115035_create_exceptions_table.php
+│   │   ├── 2026_01_28_120435_create_permission_tables.php
+│   │   └── ... (migraciones adicionales)
 │   └── seeders/
+│       ├── DatabaseSeeder.php
+│       ├── DepartmentSeeder.php
+│       ├── EmployeeSeeder.php
+│       ├── UserSeeder.php
+│       ├── RolePermissionSeeder.php
+│       └── TestDataSeeder.php
 ├── resources/
 │   ├── views/
+│   │   ├── admin/
+│   │   │   ├── users/
+│   │   │   ├── employees/
+│   │   │   ├── departments/
+│   │   │   ├── teams/
+│   │   │   ├── roles/
+│   │   │   ├── permissions/
+│   │   │   └── config/
 │   │   ├── dashboard/
 │   │   ├── schedules/
 │   │   ├── requests/
@@ -417,10 +502,19 @@ wfm-schedule-system/
 │   └── api.php
 ├── tests/
 │   ├── Feature/
+│   │   ├── Admin/
+│   │   │   ├── UserManagementTest.php
+│   │   │   ├── RolePermissionTest.php
+│   │   │   └── SystemConfigTest.php
 │   └── Unit/
+├── config/
+│   ├── permission.php
+│   ├── wfm.php
+│   └── ... (otros archivos de config)
 ├── .env.example
 ├── composer.json
 ├── package.json
+├── vite.config.js
 └── README.md
 ```
 
@@ -488,6 +582,12 @@ php artisan test --coverage
 - ✅ Cálculo de métricas
 - ✅ Registro de asistencia
 - ✅ Generación de reportes
+- ✅ **Gestión de usuarios** - CRUD y asignación de roles
+- ✅ **Gestión de empleados** - Creación y actualización
+- ✅ **Gestión de departamentos** - Jerarquía organizacional
+- ✅ **Gestión de equipos** - Creación y asignación
+- ✅ **Sistema de permisos** - RBAC y autorizaciones
+- ✅ **Configuración del sistema** - Parámetros y mantenimiento
 
 ---
 
@@ -501,19 +601,32 @@ php artisan test --coverage
 - [x] Reportes básicos
 - [x] 5 roles de usuario
 
-### 🚧 Versión 1.1 - En Desarrollo
+### ✅ Versión 1.1 (Administración Completa) - Completado
+- [x] **Gestión de Usuarios** - CRUD completo con roles y permisos
+- [x] **Gestión de Empleados** - Perfiles completos con datos personales
+- [x] **Gestión de Departamentos** - Estructura organizacional jerárquica
+- [x] **Gestión de Equipos** - Creación y asignación de empleados
+- [x] **Sistema de Roles y Permisos** - RBAC avanzado (25+ permisos)
+- [x] **Configuración del Sistema** - Parámetros globales y mantenimiento
+- [x] **Actions Pattern** - Arquitectura limpia con separación de responsabilidades
+- [x] **Policies y Autorización** - Control granular de acceso
+- [x] **Form Requests** - Validación robusta en todas las operaciones
+- [x] **Testing Suite** - Cobertura completa de funcionalidades administrativas
+
+### 🚧 Versión 1.2 - En Desarrollo
 - [ ] Integración biométrica
 - [ ] App móvil (Flutter)
 - [ ] Notificaciones push
 - [ ] Dashboard mejorado con gráficos avanzados
 - [ ] Exportación masiva programada
+- [ ] API REST completa
 
 ### 📅 Versión 2.0 - Planeado
 - [ ] Inteligencia artificial para predicción de ausentismo
 - [ ] Optimización automática de horarios
 - [ ] Integración con sistemas de nómina
-- [ ] API REST completa
 - [ ] Multi-idioma (inglés, portugués)
+- [ ] Análisis predictivo de rendimiento
 
 ---
 
