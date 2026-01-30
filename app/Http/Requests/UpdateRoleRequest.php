@@ -17,6 +17,7 @@ class UpdateRoleRequest extends FormRequest {
          'description' => 'nullable|string|max:1000',
          'permissions' => 'nullable|array',
          'permissions.*' => 'exists:permissions,id',
+         'assigned_users' => 'nullable|string', // JSON string of user IDs
       ];
    }
 
@@ -29,6 +30,7 @@ class UpdateRoleRequest extends FormRequest {
          'description.max' => 'La descripción no puede exceder los 1000 caracteres.',
          'permissions.array' => 'Los permisos deben ser un arreglo.',
          'permissions.*.exists' => 'Uno o más permisos seleccionados no existen.',
+         'assigned_users.string' => 'Los usuarios asignados deben ser una cadena JSON.',
       ];
    }
 
@@ -37,6 +39,7 @@ class UpdateRoleRequest extends FormRequest {
          'name' => 'nombre del rol',
          'description' => 'descripción',
          'permissions' => 'permisos',
+         'assigned_users' => 'usuarios asignados',
       ];
    }
 }

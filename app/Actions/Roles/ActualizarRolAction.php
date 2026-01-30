@@ -20,6 +20,12 @@ final class ActualizarRolAction {
             $role->syncPermissions($datos['permissions']);
          }
 
+         // Si se proporcionan usuarios asignados, sincronizarlos
+         if (isset($datos['assigned_users'])) {
+            $userIds = json_decode($datos['assigned_users'], true) ?? [];
+            $role->users()->sync($userIds);
+         }
+
          return $role->fresh();
       });
    }
