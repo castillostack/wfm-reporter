@@ -58,12 +58,12 @@
             @endif
 
             <!-- Search and Filters -->
-            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50 dark:bg-gray-800/50 dark:border-gray-700">
                 <form method="GET" class="flex space-x-4">
                     <div class="flex-1">
                         <input type="text" name="search" value="{{ $busqueda }}"
                             placeholder="Buscar equipos por nombre, descripción, líder o departamento..."
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
                     </div>
                     <button type="submit"
                         class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

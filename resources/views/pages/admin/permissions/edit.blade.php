@@ -45,14 +45,14 @@
                     <div class="px-6 py-4">
                         <!-- Name Field -->
                         <div class="mb-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                            <label for="name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Nombre del Permiso <span class="text-red-500">*</span>
                             </label>
                             <input type="text" id="name" name="name" value="{{ old('name', $permission->name) }}"
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('name') border-red-300 @enderror"
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('name') border-red-300 @enderror"
                                 placeholder="ej: ver-usuarios, crear-roles, etc." required>
                             @error('name')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                             <p class="mt-1 text-xs text-gray-500">
                                 Usa guiones bajos o guiones para separar palabras. Ejemplo: ver_usuarios, crear-roles
@@ -61,14 +61,15 @@
 
                         <!-- Description Field -->
                         <div class="mb-6">
-                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
+                            <label for="description"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Descripción
                             </label>
                             <textarea id="description" name="description" rows="3"
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('description') border-red-300 @enderror"
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('description') border-red-300 @enderror"
                                 placeholder="Describe qué permite hacer este permiso...">{{ old('description', $permission->description) }}</textarea>
                             @error('description')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                             <p class="mt-1 text-xs text-gray-500">
                                 Opcional: Proporciona una descripción clara del permiso para facilitar su comprensión.
@@ -77,11 +78,11 @@
 
                         <!-- Permission Category -->
                         <div class="mb-6">
-                            <label for="category" class="block text-sm font-medium text-gray-700 mb-2">
+                            <label for="category" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                 Categoría
                             </label>
                             <select id="category" name="category"
-                                class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('category') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('category') border-red-300 @enderror">
                                 <option value="">Seleccionar categoría (opcional)</option>
                                 <option value="usuarios"
                                     {{ old('category', $permission->category) == 'usuarios' ? 'selected' : '' }}>Usuarios
@@ -111,7 +112,7 @@
                                 </option>
                             </select>
                             @error('category')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                             <p class="mt-1 text-xs text-gray-500">
                                 Opcional: Ayuda a organizar los permisos por funcionalidad.

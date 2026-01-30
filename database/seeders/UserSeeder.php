@@ -33,8 +33,8 @@ class UserSeeder extends Seeder {
             //     continue; // Validar fila
 
             $email = trim($row[16]); // CORREO
-            $numeroEmpleado = trim($row[29]); // NÚMERO DE EMPLEADO
-            $cargo = trim($row[4]); // CARGO SEGÚN FUNCIONES
+            $numeroEmpleado = trim($row[34]); // NÚMERO DE EMPLEADO
+            $cargo = trim($row[3]); // CARGO SEGÚN FUNCIONES
             $funcionario = trim($row[5]); // FUNCIONARIO
 
             // if (empty($email) || empty($numeroEmpleado) || $numeroEmpleado === 'NO')
@@ -52,11 +52,11 @@ class UserSeeder extends Seeder {
                     'employee_code' => $numeroEmpleado === 'NO' ? null : $numeroEmpleado,
                     'id_number' => trim($row[12]), // CÉDULA
                     'phone' => trim($row[23]), // TELÉFONO
-                    'gender' => trim($row[28]) === 'F' ? 'F' : 'M', // SEXO
+                    'gender' => trim($row[33]) === 'F' ? 'F' : 'M', // SEXO
                     'date_of_birth' => $this->parseDate($row[8]), // FECHA NAC
                     'hire_date' => $this->parseDate($row[13]), // FECHA - INICIO DE LABORES
                     'position' => $cargo,
-                    'salary' => $this->parseSalary($row[18]), // SALARIO
+                    'salary' => $this->parseSalary($row[17]), // SALARIO
                     'is_active' => true,
                 ]
             );

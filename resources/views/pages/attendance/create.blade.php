@@ -15,35 +15,40 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="employee_id" class="block text-sm font-medium text-gray-700">Empleado</label>
+                    <label for="employee_id"
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Empleado</label>
                     <select name="employee_id" id="employee_id"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                         required>
                         <option value="">Seleccionar empleado...</option>
                         @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}
-                                ({{ $employee->employee_number }})</option>
+                                ({{ $employee->employee_number }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="mb-4">
-                    <label for="check_in_time" class="block text-sm font-medium text-gray-700">Hora de Entrada</label>
+                    <label for="check_in_time" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Hora
+                        de Entrada</label>
                     <input type="datetime-local" name="check_in_time" id="check_in_time"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                         required>
                 </div>
 
                 <div class="mb-4">
-                    <label for="check_out_time" class="block text-sm font-medium text-gray-700">Hora de Salida</label>
+                    <label for="check_out_time" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Hora
+                        de Salida</label>
                     <input type="datetime-local" name="check_out_time" id="check_out_time"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
                 </div>
 
                 <div class="mb-4">
-                    <label for="status" class="block text-sm font-medium text-gray-700">Estado</label>
+                    <label for="status"
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Estado</label>
                     <select name="status" id="status"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"
                         required>
                         <option value="present">Presente</option>
                         <option value="late">Tarde</option>
@@ -52,9 +57,10 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="notes" class="block text-sm font-medium text-gray-700">Notas</label>
+                    <label for="notes"
+                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Notas</label>
                     <textarea name="notes" id="notes" rows="3"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30"></textarea>
                 </div>
 
                 <div class="flex justify-end">

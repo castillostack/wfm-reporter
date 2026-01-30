@@ -24,7 +24,7 @@ class EmployeeSeeder extends Seeder {
             //     continue;
 
             $email = trim($row[16]);
-            $numeroEmpleado = trim($row[29]);
+            $numeroEmpleado = trim($row[34]);
             $seccion = trim($row[2]); // SECCIÓN / DEPARTAMENTO
             $funcionario = trim($row[5]);
             $cedula = trim($row[12]);
@@ -32,7 +32,7 @@ class EmployeeSeeder extends Seeder {
             $provincia = trim($row[24]);
             $distrito = trim($row[25]);
             $direccion = trim($row[27]);
-            $sexo = trim($row[28]);
+            $sexo = trim($row[33]);
 
             $user = User::where('email', $email)->first();
             // if (!$user)
@@ -55,7 +55,7 @@ class EmployeeSeeder extends Seeder {
                     'cedula' => $cedula,
                     'gender' => $sexo === 'F' ? 'F' : 'M',
                     'phone' => $telefono,
-                    'position' => trim($row[4]), // CARGO SEGÚN FUNCIONES
+                    'position' => trim($row[3]), // CARGO SEGÚN FUNCIONES
                     'department_id' => $department?->id,
                     'salary' => $user->salary, // Ya parseado en UserSeeder
                     'hire_date' => $user->hire_date,

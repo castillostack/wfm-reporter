@@ -47,25 +47,27 @@
                             <div class="px-6 py-4">
                                 <!-- Nombre de la Aplicación -->
                                 <div class="mb-6">
-                                    <label for="app_name" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="app_name"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Nombre de la Aplicación <span class="text-red-500">*</span>
                                     </label>
                                     <input type="text" id="app_name" name="app_name"
                                         value="{{ old('app_name', $configuraciones['app_name']) }}"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('app_name') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('app_name') border-red-300 @enderror"
                                         required>
                                     @error('app_name')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Zona Horaria -->
                                 <div class="mb-6">
-                                    <label for="app_timezone" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="app_timezone"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Zona Horaria <span class="text-red-500">*</span>
                                     </label>
                                     <select id="app_timezone" name="app_timezone"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('app_timezone') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('app_timezone') border-red-300 @enderror"
                                         required>
                                         <option value="">Seleccionar zona horaria</option>
                                         @foreach (timezone_identifiers_list() as $timezone)
@@ -76,17 +78,18 @@
                                         @endforeach
                                     </select>
                                     @error('app_timezone')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Driver de Correo -->
                                 <div class="mb-6">
-                                    <label for="mail_driver" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="mail_driver"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Driver de Correo <span class="text-red-500">*</span>
                                     </label>
                                     <select id="mail_driver" name="mail_driver"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('mail_driver') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('mail_driver') border-red-300 @enderror"
                                         required>
                                         <option value="smtp"
                                             {{ old('mail_driver', $configuraciones['mail_driver']) == 'smtp' ? 'selected' : '' }}>
@@ -105,17 +108,18 @@
                                             Sendmail</option>
                                     </select>
                                     @error('mail_driver')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Driver de Caché -->
                                 <div class="mb-6">
-                                    <label for="cache_driver" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="cache_driver"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Driver de Caché <span class="text-red-500">*</span>
                                     </label>
                                     <select id="cache_driver" name="cache_driver"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('cache_driver') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('cache_driver') border-red-300 @enderror"
                                         required>
                                         <option value="file"
                                             {{ old('cache_driver', $configuraciones['cache_driver']) == 'file' ? 'selected' : '' }}>
@@ -131,17 +135,18 @@
                                             Memcached</option>
                                     </select>
                                     @error('cache_driver')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Driver de Sesiones -->
                                 <div class="mb-6">
-                                    <label for="session_driver" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="session_driver"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Driver de Sesiones <span class="text-red-500">*</span>
                                     </label>
                                     <select id="session_driver" name="session_driver"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('session_driver') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('session_driver') border-red-300 @enderror"
                                         required>
                                         <option value="file"
                                             {{ old('session_driver', $configuraciones['session_driver']) == 'file' ? 'selected' : '' }}>
@@ -160,17 +165,18 @@
                                             Memcached</option>
                                     </select>
                                     @error('session_driver')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <!-- Conexión de Base de Datos -->
                                 <div class="mb-6">
-                                    <label for="database_connection" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <label for="database_connection"
+                                        class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
                                         Conexión de Base de Datos <span class="text-red-500">*</span>
                                     </label>
                                     <select id="database_connection" name="database_connection"
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('database_connection') border-red-300 @enderror"
+                                        class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('database_connection') border-red-300 @enderror"
                                         required>
                                         <option value="pgsql"
                                             {{ old('database_connection', $configuraciones['database_connection']) == 'pgsql' ? 'selected' : '' }}>
@@ -186,7 +192,7 @@
                                             SQL Server</option>
                                     </select>
                                     @error('database_connection')
-                                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
@@ -237,7 +243,7 @@
                                 class="space-y-3">
                                 @csrf
                                 <select name="command"
-                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90">
                                     <option value="optimize">Optimizar Aplicación</option>
                                     <option value="clear-compiled">Limpiar Archivos Compilados</option>
                                     <option value="key-generate">Generar Clave de App</option>

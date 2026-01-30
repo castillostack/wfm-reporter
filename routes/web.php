@@ -55,8 +55,52 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', [\App\Http\Controllers\AttendanceController::class, 'show'])->name('show');
     });
 
+    // Rutas de horarios
+    Route::prefix('horarios')->name('schedules.')->group(function () {
+        // Rutas estáticas primero (antes de rutas con parámetros dinámicos)
+        Route::get('/', [\App\Http\Controllers\ScheduleController::class, 'index'])->name('index');
+        Route::get('/crear', [\App\Http\Controllers\ScheduleController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\ScheduleController::class, 'store'])->name('store');
+        Route::get('/hoy/ver', [\App\Http\Controllers\ScheduleController::class, 'today'])->name('today');
+
+        // Asignaciones masivas (ANTES de rutas con {schedule})
+        Route::prefix('masivos')->name('bulk.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\BulkScheduleController::class, 'index'])->name('index');
+            Route::get('/crear', [\App\Http\Controllers\BulkScheduleController::class, 'create'])->name('create');
+            Route::post('/previsualizar', [\App\Http\Controllers\BulkScheduleController::class, 'preview'])->name('preview');
+            Route::post('/asignar', [\App\Http\Controllers\BulkScheduleController::class, 'assign'])->name('assign');
+            Route::get('/importar', [\App\Http\Controllers\BulkScheduleController::class, 'importForm'])->name('import.form');
+            Route::post('/importar', [\App\Http\Controllers\BulkScheduleController::class, 'import'])->name('import');
+            Route::get('/exportar', [\App\Http\Controllers\BulkScheduleController::class, 'export'])->name('export');
+            Route::get('/{assignment}', [\App\Http\Controllers\BulkScheduleController::class, 'show'])->name('show');
+            Route::delete('/{assignment}', [\App\Http\Controllers\BulkScheduleController::class, 'destroy'])->name('destroy');
+        });
+
+        // Plantillas de horarios (ANTES de rutas con {schedule})
+        Route::prefix('plantillas')->name('templates.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\ScheduleTemplateController::class, 'index'])->name('index');
+            Route::get('/crear', [\App\Http\Controllers\ScheduleTemplateController::class, 'create'])->name('create');
+            Route::post('/', [\App\Http\Controllers\ScheduleTemplateController::class, 'store'])->name('store');
+            Route::get('/{template}', [\App\Http\Controllers\ScheduleTemplateController::class, 'show'])->name('show');
+            Route::get('/{template}/editar', [\App\Http\Controllers\ScheduleTemplateController::class, 'edit'])->name('edit');
+            Route::put('/{template}', [\App\Http\Controllers\ScheduleTemplateController::class, 'update'])->name('update');
+            Route::delete('/{template}', [\App\Http\Controllers\ScheduleTemplateController::class, 'destroy'])->name('destroy');
+            Route::post('/{template}/duplicar', [\App\Http\Controllers\ScheduleTemplateController::class, 'duplicate'])->name('duplicate');
+            Route::post('/{template}/activar', [\App\Http\Controllers\ScheduleTemplateController::class, 'activate'])->name('activate');
+            Route::post('/{template}/desactivar', [\App\Http\Controllers\ScheduleTemplateController::class, 'deactivate'])->name('deactivate');
+        });
+
+        // Rutas con parámetros dinámicos AL FINAL
+        Route::get('/{schedule}', [\App\Http\Controllers\ScheduleController::class, 'show'])->name('show')->whereNumber('schedule');
+        Route::get('/{schedule}/editar', [\App\Http\Controllers\ScheduleController::class, 'edit'])->name('edit')->whereNumber('schedule');
+        Route::put('/{schedule}', [\App\Http\Controllers\ScheduleController::class, 'update'])->name('update')->whereNumber('schedule');
+        Route::delete('/{schedule}', [\App\Http\Controllers\ScheduleController::class, 'destroy'])->name('destroy')->whereNumber('schedule');
+        Route::post('/{schedule}/publicar', [\App\Http\Controllers\ScheduleController::class, 'publish'])->name('publish')->whereNumber('schedule');
+        Route::post('/{schedule}/despublicar', [\App\Http\Controllers\ScheduleController::class, 'unpublish'])->name('unpublish')->whereNumber('schedule');
+    });
+
     // Rutas de administración (solo Analista WFM)
-    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::middleware('role:analista-wfm')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', \App\Http\Controllers\UserManagementController::class);
         Route::post('users/import', [\App\Http\Controllers\UserManagementController::class, 'import'])->name('users.import');
         Route::get('users/export', [\App\Http\Controllers\UserManagementController::class, 'export'])->name('users.export');

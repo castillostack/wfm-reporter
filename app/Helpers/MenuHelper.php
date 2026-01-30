@@ -30,15 +30,16 @@ class MenuHelper {
             $scheduleSubItems = [];
 
             if ($user->hasRole('analista-wfm')) {
-                $scheduleSubItems[] = ['name' => 'Todos los Horarios', 'path' => '/horarios', 'permission' => 'view_all_schedules'];
-                $scheduleSubItems[] = ['name' => 'Crear Horario', 'path' => '/horarios/crear', 'permission' => 'create_schedule'];
-                $scheduleSubItems[] = ['name' => 'Asignación Masiva', 'path' => '/horarios/asignacion-masiva', 'permission' => 'create_schedule'];
-                $scheduleSubItems[] = ['name' => 'Importar CSV', 'path' => '/horarios/importar', 'permission' => 'import_schedules'];
-                $scheduleSubItems[] = ['name' => 'Plantillas', 'path' => '/plantillas-horarios', 'permission' => 'create_schedule'];
+                $scheduleSubItems[] = ['name' => 'Todos los Horarios', 'path' => '/horarios', 'permission' => 'view_all_attendance'];
+                $scheduleSubItems[] = ['name' => 'Crear Horario', 'path' => '/horarios/crear', 'permission' => 'manage_attendance'];
+                $scheduleSubItems[] = ['name' => 'Asignaciones Masivas', 'path' => '/horarios/masivos', 'permission' => 'view_all_attendance'];
+                $scheduleSubItems[] = ['name' => 'Importar CSV', 'path' => '/horarios/masivos/importar', 'permission' => 'manage_attendance'];
+                $scheduleSubItems[] = ['name' => 'Plantillas', 'path' => '/horarios/plantillas', 'permission' => 'manage_attendance'];
+                $scheduleSubItems[] = ['name' => 'Horarios de Hoy', 'path' => '/horarios/hoy/ver', 'permission' => 'view_all_attendance'];
             } elseif ($user->hasRole('coordinador')) {
-                $scheduleSubItems[] = ['name' => 'Horarios de Mi Equipo', 'path' => '/horarios/equipo', 'permission' => 'view_team_schedule'];
+                $scheduleSubItems[] = ['name' => 'Horarios de Mi Equipo', 'path' => '/horarios', 'permission' => 'view_team_attendance'];
             } elseif ($user->hasAnyRole(['jefe-departamento', 'director-nacional'])) {
-                $scheduleSubItems[] = ['name' => 'Ver Horarios', 'path' => '/horarios', 'permission' => 'view_all_schedules'];
+                $scheduleSubItems[] = ['name' => 'Ver Horarios', 'path' => '/horarios', 'permission' => 'view_all_attendance'];
             }
 
             $items[] = [
@@ -53,8 +54,8 @@ class MenuHelper {
             $items[] = [
                 'icon' => 'calendar',
                 'name' => 'Mi Horario',
-                'path' => '/mi-horario',
-                'permission' => 'view_own_schedule',
+                'path' => '/horarios',
+                'permission' => 'view_own_attendance',
             ];
         }
 

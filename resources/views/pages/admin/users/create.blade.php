@@ -25,38 +25,42 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Información Personal</h3>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Nombre *</label>
+                            <label for="name"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre *</label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('name') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('name') border-red-500 dark:border-red-500 @enderror">
                             @error('name')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="last_name" class="block text-sm font-medium text-gray-700">Apellido *</label>
+                            <label for="last_name"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Apellido *</label>
                             <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('last_name') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('last_name') border-red-500 dark:border-red-500 @enderror">
                             @error('last_name')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email *</label>
+                            <label for="email"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Email *</label>
                             <input type="email" name="email" id="email" value="{{ old('email') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('email') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('email') border-red-500 dark:border-red-500 @enderror">
                             @error('email')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                            <label for="phone"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Teléfono</label>
                             <input type="tel" name="phone" id="phone" value="{{ old('phone') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('phone') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('phone') border-red-500 dark:border-red-500 @enderror">
                             @error('phone')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -67,21 +71,23 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Información Laboral</h3>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
-                            <label for="employee_number" class="block text-sm font-medium text-gray-700">ID Empleado
+                            <label for="employee_number"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">ID Empleado
                                 *</label>
                             <input type="text" name="employee_number" id="employee_number"
                                 value="{{ old('employee_number') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('employee_number') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('employee_number') border-red-500 dark:border-red-500 @enderror">
                             @error('employee_number')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="department_id" class="block text-sm font-medium text-gray-700">Departamento
+                            <label for="department_id"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Departamento
                                 *</label>
                             <select name="department_id" id="department_id"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('department_id') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 @error('department_id') border-red-500 dark:border-red-500 @enderror">
                                 <option value="">Seleccionar departamento</option>
                                 @foreach (\App\Models\Department::all() as $department)
                                     <option value="{{ $department->id }}"
@@ -91,26 +97,28 @@
                                 @endforeach
                             </select>
                             @error('department_id')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="hire_date" class="block text-sm font-medium text-gray-700">Fecha de
+                            <label for="hire_date"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Fecha de
                                 Contratación</label>
                             <input type="date" name="hire_date" id="hire_date" value="{{ old('hire_date') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('hire_date') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('hire_date') border-red-500 dark:border-red-500 @enderror">
                             @error('hire_date')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="position" class="block text-sm font-medium text-gray-700">Cargo</label>
+                            <label for="position"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Cargo</label>
                             <input type="text" name="position" id="position" value="{{ old('position') }}"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('position') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('position') border-red-500 dark:border-red-500 @enderror">
                             @error('position')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -121,21 +129,23 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Seguridad</h3>
                     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña *</label>
+                            <label for="password"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña *</label>
                             <input type="password" name="password" id="password"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('password') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('password') border-red-500 dark:border-red-500 @enderror">
                             @error('password')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div>
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmar
-                                Contraseña *</label>
+                            <label for="password_confirmation"
+                                class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Confirmar Contraseña
+                                *</label>
                             <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('password_confirmation') border-red-300 @enderror">
+                                class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 @error('password_confirmation') border-red-500 dark:border-red-500 @enderror">
                             @error('password_confirmation')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -145,9 +155,10 @@
                 <div>
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Roles y Permisos</h3>
                     <div>
-                        <label for="role" class="block text-sm font-medium text-gray-700">Rol *</label>
+                        <label for="role" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Rol
+                            *</label>
                         <select name="role" id="role"
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('role') border-red-300 @enderror">
+                            class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 @error('role') border-red-500 dark:border-red-500 @enderror">
                             <option value="">Seleccionar rol</option>
                             @foreach (\Spatie\Permission\Models\Role::all() as $role)
                                 <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
@@ -156,7 +167,7 @@
                             @endforeach
                         </select>
                         @error('role')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
