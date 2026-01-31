@@ -83,12 +83,7 @@ class RoleManagementController extends Controller {
          abort(403, 'Acceso denegado. Se requiere rol de Analista WFM.');
       }
 
-      $usuariosAsignados = $role->users()->orderBy('name')->get();
-      $usuariosDisponibles = \App\Models\User::whereDoesntHave('roles', function ($query) use ($role) {
-         $query->where('id', $role->id);
-      })->orderBy('name')->get();
-
-      return view('pages.admin.roles.edit', compact('role', 'usuariosAsignados', 'usuariosDisponibles'));
+      return view('pages.admin.roles.edit', compact('role'));
    }
 
    public function update(UpdateRoleRequest $request, Role $role, ActualizarRolAction $accion): RedirectResponse {

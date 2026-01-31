@@ -17,7 +17,6 @@ class UpdateRoleRequest extends FormRequest {
          'description' => 'nullable|string|max:1000',
          'permissions' => 'nullable|array',
          'permissions.*' => 'exists:permissions,id',
-         'assigned_users' => 'nullable|string', // JSON string of user IDs
       ];
    }
 
