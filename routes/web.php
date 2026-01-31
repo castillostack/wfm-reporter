@@ -128,6 +128,8 @@ Route::middleware('auth')->group(function () {
 
         // Rutas de roles
         Route::resource('roles', \App\Http\Controllers\RoleManagementController::class);
+        Route::get('roles/{role}/users', [\App\Http\Controllers\RoleManagementController::class, 'manageUsers'])->name('roles.users.manage');
+        Route::put('roles/{role}/users', [\App\Http\Controllers\RoleManagementController::class, 'updateUsers'])->name('roles.users.update');
 
         // Rutas de permisos
         Route::resource('permissions', \App\Http\Controllers\PermissionManagementController::class);
