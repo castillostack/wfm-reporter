@@ -34,7 +34,7 @@ class UserSeeder extends Seeder {
 
             $email = trim($row[16]); // CORREO
             $numeroEmpleado = trim($row[34]); // NÚMERO DE EMPLEADO
-            $cargo = trim($row[3]); // CARGO SEGÚN FUNCIONES
+            $cargo = trim($row[4]); // CARGO SEGÚN FUNCIONES
             $funcionario = trim($row[5]); // FUNCIONARIO
 
             // if (empty($email) || empty($numeroEmpleado) || $numeroEmpleado === 'NO')

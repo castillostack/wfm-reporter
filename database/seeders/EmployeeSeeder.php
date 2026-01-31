@@ -42,7 +42,7 @@ class EmployeeSeeder extends Seeder {
             $department = Department::where('name', $seccion)->first();
             if (!$department) {
                 // Si no existe, asignar DNASA
-                $department = Department::where('code', 'DNASA')->first();
+                $department = Department::where('name', 'DNASA')->first();
             }
 
             // Crear empleado si no existe
